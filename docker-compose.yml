@@ -1,0 +1,83 @@
+version: '3.8'
+
+services:
+  nginx:
+    image: nginx:alpine
+    ports:
+      - "80:80"
+    volumes:
+      - ./infrastructure/nginx/nginx.conf:/etc/nginx/conf.d/default.conf:ro
+    depends_on:
+      - web
+      - api
+    restart: always
+    deploy:
+      resources:
+        limits:
+          memory: 100M
+
+  web:
+    build:
+      context: .
+      dockerfile: infrastructure/docker/Dockerfile.web
+    environment:
+      - NEXT_PUBLIC_API_URL=http://localhost/api/v1
+    depends_on:
+      - api
+    restart: always
+    deploy:
+      resources:
+        limits:
+          memory: 300M
+
+  api:
+    build:
+      context: .
+      dockerfile: infrastructure/docker/Dockerfile.api
+    environment:
+      - PORT=5000
+      - NODE_ENV=production
+      - MONGODB_URI=mongodb://mongo:27017/pyq_insight
+      - ML_SERVICE_URL=http://ml:8000
+      - ML_SERVICE_API_KEY=internal_pyq_insight_ml_secret_key
+      - UPLOAD_LOCAL_DIR=/app/uploads
+      - CLIENT_ORIGIN=http://localhost
+    volumes:
+      - paper_uploads:/app/uploads
+    depends_on:
+      - mongo
+      - ml
+    restart: always
+    deploy:
+      resources:
+        limits:
+          memory: 250M
+
+  ml:
+    build:
+      context: .
+      dockerfile: infrastructure/docker/Dockerfile.ml
+    environment:
+      - ML_SERVICE_API_KEY=internal_pyq_insight_ml_secret_key
+    volumes:
+      - paper_uploads:/app/uploads:ro
+    restart: always
+    deploy:
+      resources:
+        limits:
+          memory: 350M
+
+  mongo:
+    image: mongo:7.0-jammy
+    command: ["mongod", "--wiredTigerCacheSizeGB", "0.25"]
+    volumes:
+      - mongo_data:/data/db
+    restart: always
+    deploy:
+      resources:
+        limits:
+          memory: 400M
+
+volumes:
+  paper_uploads:
+  mongo_data:
