@@ -9,46 +9,37 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        // Official Academic SaaS Palette:
-        // Deep Navy (#17153B) - Primary dark surfaces, backgrounds
-        // Royal Indigo (#2E236C) - Primary interactive elements, active nav, primary buttons
-        // Muted Indigo (#433D8B) - Secondary accents, selected states, highlights
-        // Soft Lavender (#C8ACD6) - Subtle text accents, tags, highlights
-        app: {
-          bg: "#0F0E26",           // Root canvas: deep neutral navy (not pure black)
-          surface: "#17153B",      // Primary surface: Deep Navy
-          elevated: "#1F1B47",     // Elevated cards/panels: slightly lighter navy
-          card: "#17153B",         // Main cards
-          input: "#141233",        // Input fields: differentiated from surface
-          border: "#292456",       // Subtle 1px dark indigo separator
-          borderHover: "#3B3374",  // Subtle border hover
+        // Creative Director Palette:
+        // Deep Midnight Navy, Rich Violet, Muted Lavender, Cool Cyan & Electric Blue accents
+        canvas: {
+          base: "#0A0915",
+          deep: "#0F0D20",
+          surface: "rgba(23, 21, 59, 0.65)",
+          elevated: "rgba(31, 27, 71, 0.75)",
+          border: "rgba(200, 172, 214, 0.12)",
+          borderHover: "rgba(200, 172, 214, 0.28)",
+          glass: "rgba(15, 13, 32, 0.72)",
         },
-        indigo: {
-          deep: "#17153B",
+        brand: {
+          navy: "#17153B",
           royal: "#2E236C",
           muted: "#433D8B",
           lavender: "#C8ACD6",
+          cyan: "#38BDF8",
+          violet: "#8B5CF6",
         },
-        // Functional typography tokens
-        text: {
-          primary: "#F5F3F8",     // Soft off-white
-          secondary: "#B8B2D1",   // Muted grey-lavender
-          muted: "#7A739E",       // Readable neutral muted
-        },
-        // Functional state accents (restrained, low saturation)
-        status: {
-          success: "#10B981",
-          warning: "#F59E0B",
-          error: "#EF4444",
+        ink: {
+          primary: "#F8FAFC",
+          secondary: "#CBD5E1",
+          muted: "#847F9D",
         },
       },
       fontFamily: {
         sans: [
+          "Plus Jakarta Sans",
           "Inter",
           "-apple-system",
           "BlinkMacSystemFont",
-          '"Segoe UI"',
-          "Roboto",
           "sans-serif",
         ],
         mono: [
@@ -58,18 +49,15 @@ module.exports = {
           "monospace",
         ],
       },
-      borderRadius: {
-        sm: "4px",
-        DEFAULT: "6px",
-        md: "6px",
-        lg: "8px",
-        xl: "10px",
-        "2xl": "12px",
+      backgroundImage: {
+        "radial-hero": "radial-gradient(circle at 50% 0%, rgba(67, 61, 139, 0.35) 0%, rgba(46, 35, 108, 0.15) 45%, rgba(10, 9, 21, 0) 70%)",
+        "mesh-glow": "radial-gradient(at 80% 20%, rgba(139, 92, 246, 0.18) 0px, transparent 50%), radial-gradient(at 20% 80%, rgba(56, 189, 248, 0.12) 0px, transparent 50%)",
       },
       boxShadow: {
-        none: "none",
-        subtle: "0 1px 2px 0 rgba(0, 0, 0, 0.25)",
-        popover: "0 4px 16px -2px rgba(15, 14, 38, 0.6)",
+        glass: "0 8px 32px 0 rgba(0, 0, 0, 0.37), inset 0 1px 0 0 rgba(200, 172, 214, 0.15)",
+        "glass-hover": "0 14px 40px -4px rgba(46, 35, 108, 0.45), inset 0 1px 0 0 rgba(200, 172, 214, 0.3)",
+        glow: "0 0 35px -5px rgba(67, 61, 139, 0.5)",
+        cta: "0 10px 25px -5px rgba(46, 35, 108, 0.5), inset 0 1px 0 0 rgba(200, 172, 214, 0.3)",
       },
     },
   },

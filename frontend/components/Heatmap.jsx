@@ -2,15 +2,15 @@ export default function Heatmap({ topics = [] }) {
   const units = [...new Set(topics.map((t) => t.unit || "General"))];
 
   const levelBadges = {
-    High: "bg-rose-500/10 text-rose-300 border-rose-500/20",
-    Medium: "bg-amber-500/10 text-amber-300 border-amber-500/20",
-    Low: "bg-emerald-500/10 text-emerald-300 border-emerald-500/20",
+    High: "bg-rose-500/15 text-rose-300 border-rose-500/30",
+    Medium: "bg-amber-500/15 text-amber-300 border-amber-500/30",
+    Low: "bg-emerald-500/15 text-emerald-300 border-emerald-500/30",
   };
 
-  const levelPill = {
-    High: "text-rose-400 font-semibold",
-    Medium: "text-amber-400 font-semibold",
-    Low: "text-emerald-400 font-semibold",
+  const borderAccents = {
+    High: "border-l-rose-500",
+    Medium: "border-l-amber-500",
+    Low: "border-l-emerald-500",
   };
 
   return (
@@ -18,22 +18,24 @@ export default function Heatmap({ topics = [] }) {
       {units.map((unit) => {
         const unitTopics = topics.filter((t) => (t.unit || "General") === unit);
         return (
-          <div key={unit} className="space-y-2">
-            <div className="flex items-center justify-between border-b border-app-border pb-1.5">
-              <h4 className="text-xs font-mono font-medium text-text-primary uppercase tracking-wider">{unit}</h4>
-              <span className="text-[10px] text-text-muted font-mono">{unitTopics.length} topics</span>
+          <div key={unit} className="space-y-3">
+            <div className="flex items-center justify-between border-b border-canvas-border pb-2">
+              <h4 className="text-xs font-mono font-bold text-white uppercase tracking-wider">{unit}</h4>
+              <span className="text-[10px] text-ink-muted font-mono">{unitTopics.length} topics</span>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2.5">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5">
               {unitTopics.map((t) => (
                 <div
                   key={t.id}
-                  className="rounded border border-app-border bg-app-elevated/40 p-3 flex flex-col justify-between gap-2 hover:bg-app-elevated/80 transition"
+                  className={`rounded-xl border border-canvas-border bg-canvas-elevated/50 p-4 flex flex-col justify-between gap-3 hover:border-brand-lavender/40 hover:bg-canvas-elevated/80 transition-all border-l-2 ${
+                    borderAccents[t.level] || "border-l-brand-royal"
+                  }`}
                 >
-                  <p className="font-medium text-xs text-text-primary leading-snug line-clamp-2">{t.name}</p>
-                  <div className="flex items-center justify-between pt-2 border-t border-app-border/60 text-[11px]">
-                    <span className="font-mono text-text-secondary">{t.score}% Weight</span>
-                    <span className={`text-[10px] font-mono px-1.5 py-0.5 rounded border ${levelBadges[t.level]}`}>
+                  <p className="font-semibold text-xs text-white leading-snug line-clamp-2">{t.name}</p>
+                  <div className="flex items-center justify-between pt-2 border-t border-canvas-border/50 text-[11px]">
+                    <span className="font-mono text-ink-secondary">{t.score}% Priority</span>
+                    <span className={`text-[10px] font-mono px-2 py-0.5 rounded-full border ${levelBadges[t.level]}`}>
                       {t.level}
                     </span>
                   </div>

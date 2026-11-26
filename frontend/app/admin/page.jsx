@@ -405,24 +405,24 @@ export default function AdminPage() {
   }
 
   return (
-    <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-6">
+    <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 pb-16 space-y-8">
       {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-app-border pb-4">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-canvas-border pb-5">
         <div>
-          <div className="flex items-center gap-2">
-            <h1 className="text-xl font-bold tracking-tight text-text-primary">Admin Control Center</h1>
-            <span className="px-2 py-0.5 rounded bg-indigo-royal text-indigo-lavender text-[11px] font-mono">
-              CURRICULUM ADMIN
+          <div className="flex items-center gap-2.5">
+            <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-white">Admin Control Center</h1>
+            <span className="px-3 py-1 rounded-full bg-brand-royal border border-brand-lavender/30 text-brand-lavender text-xs font-mono">
+              CURRICULUM ROOT
             </span>
           </div>
-          <p className="text-xs text-text-muted mt-0.5">
+          <p className="text-xs sm:text-sm text-ink-secondary mt-1">
             Ingest question papers, review NLP classification queue, and configure syllabus taxonomy
           </p>
         </div>
       </div>
 
       {error && (
-        <div className="rounded border border-rose-500/30 bg-rose-500/10 p-3 text-xs text-rose-300 font-medium flex justify-between items-center">
+        <div className="rounded-xl border border-rose-500/30 bg-rose-500/10 p-4 text-xs text-rose-300 font-medium flex justify-between items-center">
           <div className="flex items-center gap-2">
             <AlertTriangle className="w-4 h-4 shrink-0" />
             <span>{error}</span>
@@ -434,118 +434,118 @@ export default function AdminPage() {
       )}
 
       {/* SECTION 1: Paper Ingestion */}
-      <div className="rounded border border-app-border bg-app-surface p-5 space-y-4">
-        <div className="border-b border-app-border pb-2.5">
-          <h2 className="text-xs font-semibold text-text-primary uppercase tracking-wider font-mono">
+      <div className="glass-panel rounded-2xl p-6 sm:p-8 space-y-5">
+        <div className="border-b border-canvas-border pb-3">
+          <h2 className="text-xs font-mono font-bold text-brand-lavender uppercase tracking-wider">
             1. Ingest Examination Paper
           </h2>
-          <p className="text-xs text-text-muted mt-0.5">
+          <p className="text-xs text-ink-secondary mt-0.5">
             Extract questions from university PDF papers using pdfplumber with OCR fallback and TF-IDF topic mapping.
           </p>
         </div>
 
         <form onSubmit={handleUpload} className="space-y-4 max-w-3xl text-xs">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div className="space-y-1">
-              <label className="block text-text-secondary font-medium">Target Subject</label>
+            <div className="space-y-1.5">
+              <label className="block text-ink-secondary font-medium">Target Subject</label>
               <select
                 value={form.subjectId}
                 onChange={(e) => handleSubjectChange(e.target.value)}
-                className="w-full rounded border border-app-border bg-app-input px-3 py-2 text-xs text-text-primary focus:border-indigo-lavender focus:outline-none transition font-mono"
+                className="w-full rounded-xl glass-input px-3.5 py-2.5 text-xs text-white focus:outline-none font-mono"
               >
                 {subjects.map((s) => (
-                  <option key={s._id} value={s._id}>
+                  <option key={s._id} value={s._id} className="bg-canvas-deep text-white">
                     {s.name} ({s.code}) - Sem {s.semester}
                   </option>
                 ))}
               </select>
             </div>
 
-            <div className="space-y-1">
-              <label className="block text-text-secondary font-medium">Examination Year</label>
+            <div className="space-y-1.5">
+              <label className="block text-ink-secondary font-medium">Examination Year</label>
               <input
                 type="number"
                 min={2015}
                 max={2030}
                 value={form.year}
                 onChange={(e) => setForm({ ...form, year: parseInt(e.target.value, 10) })}
-                className="w-full rounded border border-app-border bg-app-input px-3 py-2 text-xs text-text-primary focus:border-indigo-lavender focus:outline-none transition font-mono"
+                className="w-full rounded-xl glass-input px-3.5 py-2.5 text-xs text-white focus:outline-none font-mono"
               />
             </div>
 
-            <div className="space-y-1">
-              <label className="block text-text-secondary font-medium">Session</label>
+            <div className="space-y-1.5">
+              <label className="block text-ink-secondary font-medium">Session</label>
               <select
                 value={form.session}
                 onChange={(e) => setForm({ ...form, session: e.target.value })}
-                className="w-full rounded border border-app-border bg-app-input px-3 py-2 text-xs text-text-primary focus:border-indigo-lavender focus:outline-none transition font-mono"
+                className="w-full rounded-xl glass-input px-3.5 py-2.5 text-xs text-white focus:outline-none font-mono"
               >
-                <option value="Odd">Odd Semester</option>
-                <option value="Even">Even Semester</option>
+                <option value="Odd" className="bg-canvas-deep text-white">Odd Semester</option>
+                <option value="Even" className="bg-canvas-deep text-white">Even Semester</option>
               </select>
             </div>
 
-            <div className="space-y-1">
-              <label className="block text-text-secondary font-medium">Total Marks</label>
+            <div className="space-y-1.5">
+              <label className="block text-ink-secondary font-medium">Total Marks</label>
               <select
                 value={form.totalMarks}
                 onChange={(e) => setForm({ ...form, totalMarks: parseInt(e.target.value, 10) })}
-                className="w-full rounded border border-app-border bg-app-input px-3 py-2 text-xs text-text-primary focus:border-indigo-lavender focus:outline-none transition font-mono"
+                className="w-full rounded-xl glass-input px-3.5 py-2.5 text-xs text-white focus:outline-none font-mono"
               >
-                <option value={100}>100 Marks (Old Scheme)</option>
-                <option value={70}>70 Marks (New NEP Scheme)</option>
+                <option value={100} className="bg-canvas-deep text-white">100 Marks (Old Scheme)</option>
+                <option value={70} className="bg-canvas-deep text-white">70 Marks (New NEP Scheme)</option>
               </select>
             </div>
           </div>
 
-          <div className="space-y-1">
-            <label className="block text-text-secondary font-medium">Question Paper PDF</label>
+          <div className="space-y-1.5">
+            <label className="block text-ink-secondary font-medium">Question Paper PDF</label>
             <input
               type="file"
               accept="application/pdf"
               required
               onChange={(e) => setFile(e.target.files[0])}
-              className="w-full rounded border border-app-border bg-app-input p-2 text-xs text-text-secondary file:mr-3 file:py-1 file:px-2.5 file:rounded file:border-0 file:text-xs file:font-medium file:bg-indigo-royal file:text-text-primary hover:file:bg-indigo-muted transition cursor-pointer"
+              className="w-full rounded-xl glass-input p-2 text-xs text-ink-secondary file:mr-3 file:py-1.5 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-brand-royal file:text-white hover:file:bg-brand-muted transition cursor-pointer"
             />
           </div>
 
           <button
             disabled={uploading}
-            className="rounded bg-indigo-royal px-5 py-2 text-xs font-medium text-text-primary hover:bg-indigo-muted transition flex items-center gap-2 disabled:opacity-50"
+            className="rounded-xl bg-gradient-to-r from-brand-royal via-brand-muted to-brand-royal px-6 py-2.5 text-xs font-semibold text-white shadow-cta hover:opacity-95 transition flex items-center gap-2 disabled:opacity-50"
           >
-            <Upload className="w-3.5 h-3.5 text-indigo-lavender" />
+            <Upload className="w-4 h-4 text-brand-lavender" />
             <span>{uploading ? "Extracting & Segmenting Questions..." : "Ingest & Process Paper"}</span>
           </button>
         </form>
 
         {uploadResult && (
-          <div className="rounded border border-emerald-500/30 bg-emerald-500/10 p-3 text-xs text-emerald-300 space-y-1">
+          <div className="rounded-xl border border-emerald-500/30 bg-emerald-500/10 p-4 text-xs text-emerald-300 space-y-1">
             <p className="font-semibold flex items-center gap-1.5">
               <CheckCircle2 className="w-4 h-4 text-emerald-400" />
               <span>Paper Ingested &amp; Classified Successfully</span>
             </p>
-            <p className="font-mono text-[11px] text-text-muted">Paper ID: {uploadResult.paperId}</p>
-            <p className="text-text-secondary">
-              Extracted and assigned <strong className="text-text-primary">{uploadResult.questions}</strong> examination questions.
+            <p className="font-mono text-[11px] text-ink-muted">Paper ID: {uploadResult.paperId}</p>
+            <p className="text-ink-secondary">
+              Extracted and assigned <strong className="text-white">{uploadResult.questions}</strong> examination questions.
             </p>
           </div>
         )}
       </div>
 
       {/* SECTION 2: Review Queue */}
-      <div className="rounded border border-app-border bg-app-surface p-5 space-y-4">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-app-border pb-2.5">
+      <div className="glass-panel rounded-2xl p-6 sm:p-8 space-y-5">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-canvas-border pb-3">
           <div>
-            <h2 className="text-xs font-semibold text-text-primary uppercase tracking-wider font-mono">
+            <h2 className="text-xs font-mono font-bold text-brand-lavender uppercase tracking-wider">
               2. Review Queue (Low-Confidence Questions)
             </h2>
-            <p className="text-xs text-text-muted mt-0.5">
+            <p className="text-xs text-ink-secondary mt-0.5">
               Questions whose cosine similarity score fell below threshold (&lt;0.15) requiring manual confirmation.
             </p>
           </div>
           <button
             onClick={loadReviewQueue}
-            className="inline-flex items-center gap-1.5 text-xs text-indigo-lavender hover:underline self-start sm:self-auto transition"
+            className="inline-flex items-center gap-1.5 text-xs text-brand-lavender hover:text-white self-start sm:self-auto transition font-semibold"
           >
             <RefreshCw className={`w-3.5 h-3.5 ${queueLoading ? "animate-spin" : ""}`} />
             <span>Refresh Queue ({reviewQueue.length})</span>
@@ -553,33 +553,33 @@ export default function AdminPage() {
         </div>
 
         {queueLoading ? (
-          <p className="text-center py-10 text-xs text-text-muted">Loading queue items...</p>
+          <p className="text-center py-12 text-xs text-ink-muted">Loading queue items...</p>
         ) : reviewQueue.length > 0 ? (
-          <div className="divide-y divide-app-border">
+          <div className="divide-y divide-canvas-border">
             {reviewQueue.map((q) => (
-              <div key={q._id} className="py-3 space-y-2">
+              <div key={q._id} className="py-4 space-y-2.5">
                 <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-3">
-                  <div className="space-y-1 flex-1">
+                  <div className="space-y-1.5 flex-1">
                     <div className="flex items-center gap-2">
-                      <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-rose-500/10 border border-rose-500/20 text-rose-300">
+                      <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-rose-500/15 border border-rose-500/30 text-rose-300">
                         Score: {Math.round((q.confidence || 0) * 100)}%
                       </span>
-                      <span className="text-[10px] px-1.5 py-0.5 rounded bg-app-elevated border border-app-border text-text-muted font-mono">
+                      <span className="text-[10px] px-2 py-0.5 rounded-full bg-canvas-elevated border border-canvas-border text-ink-muted font-mono">
                         {q.marks} Marks
                       </span>
                     </div>
-                    <p className="text-xs text-text-primary leading-relaxed">{q.text}</p>
+                    <p className="text-xs text-white leading-relaxed">{q.text}</p>
                   </div>
 
                   <div className="flex items-center gap-2 shrink-0">
                     <select
                       id={`sel-${q._id}`}
-                      className="rounded border border-app-border bg-app-input p-1.5 text-xs text-text-primary focus:border-indigo-lavender focus:outline-none max-w-[200px]"
+                      className="rounded-xl glass-input p-2 text-xs text-white focus:outline-none max-w-[200px]"
                       defaultValue=""
                     >
-                      <option value="" disabled>Assign Topic...</option>
+                      <option value="" disabled className="bg-canvas-deep text-white">Assign Topic...</option>
                       {topics.map((t) => (
-                        <option key={t.id || t._id} value={t.id || t._id}>
+                        <option key={t.id || t._id} value={t.id || t._id} className="bg-canvas-deep text-white">
                           {t.name} ({t.unitTitle || t.unit})
                         </option>
                       ))}
@@ -591,7 +591,7 @@ export default function AdminPage() {
                         if (sel && sel.value) assignTopic(q._id, sel.value);
                         else alert("Select a topic first");
                       }}
-                      className="rounded bg-indigo-royal px-3 py-1.5 text-xs font-medium text-text-primary hover:bg-indigo-muted transition"
+                      className="rounded-xl bg-brand-royal px-4 py-2 text-xs font-semibold text-white hover:bg-brand-muted transition shadow-cta"
                     >
                       Verify
                     </button>
@@ -601,7 +601,7 @@ export default function AdminPage() {
             ))}
           </div>
         ) : (
-          <div className="text-center py-10 text-emerald-400 text-xs flex items-center justify-center gap-1.5 font-medium">
+          <div className="text-center py-12 text-emerald-400 text-xs flex items-center justify-center gap-2 font-medium">
             <CheckCircle2 className="w-4 h-4" />
             <span>No low-confidence questions waiting in review queue</span>
           </div>
@@ -609,21 +609,21 @@ export default function AdminPage() {
       </div>
 
       {/* SECTION 3: Subject & Syllabus Management */}
-      <div className="rounded border border-app-border bg-app-surface p-5 space-y-4">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-app-border pb-2.5">
+      <div className="glass-panel rounded-2xl p-6 sm:p-8 space-y-6">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-canvas-border pb-4">
           <div>
-            <h2 className="text-xs font-semibold text-text-primary uppercase tracking-wider font-mono">
+            <h2 className="text-xs font-mono font-bold text-brand-lavender uppercase tracking-wider">
               3. Subject &amp; Syllabus Management
             </h2>
-            <p className="text-xs text-text-muted mt-0.5">
+            <p className="text-xs text-ink-secondary mt-0.5">
               Configure curriculum hierarchy (Subjects &rarr; Units &rarr; Topics) with TF-IDF keyword profiles.
             </p>
           </div>
           <button
             onClick={openAddSubject}
-            className="rounded bg-indigo-royal px-3 py-1.5 text-xs font-medium text-text-primary hover:bg-indigo-muted transition flex items-center gap-1.5 self-start sm:self-auto"
+            className="rounded-xl bg-gradient-to-r from-brand-royal via-brand-muted to-brand-royal px-4 py-2 text-xs font-semibold text-white shadow-cta hover:opacity-95 transition flex items-center gap-1.5 self-start sm:self-auto"
           >
-            <Plus className="w-3.5 h-3.5 text-indigo-lavender" />
+            <Plus className="w-3.5 h-3.5 text-brand-lavender" />
             <span>Add Subject</span>
           </button>
         </div>
@@ -631,7 +631,7 @@ export default function AdminPage() {
         {/* Feedback Alert */}
         {syllabusFeedback.message && (
           <div
-            className={`rounded p-2.5 border text-xs font-medium flex justify-between items-center ${
+            className={`rounded-xl p-3 border text-xs font-medium flex justify-between items-center ${
               syllabusFeedback.type === "success"
                 ? "bg-emerald-500/10 border-emerald-500/20 text-emerald-300"
                 : "bg-rose-500/10 border-rose-500/20 text-rose-300"
@@ -648,21 +648,21 @@ export default function AdminPage() {
         )}
 
         {/* 3-Column Drilldown Architecture */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 items-start">
           {/* Column A: Subjects */}
-          <div className="lg:col-span-4 border border-app-border rounded p-3 bg-app-elevated/20 space-y-2.5">
-            <div className="flex justify-between items-center border-b border-app-border pb-1.5">
-              <span className="text-[11px] font-mono font-medium text-text-primary uppercase tracking-wider flex items-center gap-1.5">
-                <BookOpen className="w-3.5 h-3.5 text-indigo-lavender" />
+          <div className="lg:col-span-4 border border-canvas-border rounded-xl p-4 bg-canvas-elevated/30 space-y-3">
+            <div className="flex justify-between items-center border-b border-canvas-border pb-2">
+              <span className="text-xs font-mono font-bold text-white uppercase tracking-wider flex items-center gap-1.5">
+                <BookOpen className="w-3.5 h-3.5 text-brand-lavender" />
                 <span>Subjects ({subjects.length})</span>
               </span>
-              <span className="text-[10px] text-text-muted font-mono">Select to view</span>
+              <span className="text-[10px] text-ink-muted font-mono">Select to drilldown</span>
             </div>
 
             {subjects.length === 0 ? (
-              <p className="text-xs text-text-muted text-center py-6">No subjects created yet.</p>
+              <p className="text-xs text-ink-muted text-center py-8">No subjects created yet.</p>
             ) : (
-              <div className="space-y-1.5 max-h-[460px] overflow-y-auto pr-1">
+              <div className="space-y-2 max-h-[480px] overflow-y-auto pr-1">
                 {subjects.map((sub) => {
                   const isSelected = selectedSubject && selectedSubject._id === sub._id;
                   return (
@@ -674,41 +674,41 @@ export default function AdminPage() {
                         setSelectedUnit(null);
                         setUnitTopics([]);
                       }}
-                      className={`p-2.5 rounded border text-xs cursor-pointer transition ${
+                      className={`p-3 rounded-xl border text-xs cursor-pointer transition ${
                         isSelected
-                          ? "bg-app-elevated border-indigo-muted text-text-primary"
-                          : "bg-app-surface border-app-border hover:bg-app-elevated/40"
+                          ? "bg-brand-royal/50 border-brand-lavender/50 text-white shadow-glow"
+                          : "bg-canvas-elevated/40 border-canvas-border hover:bg-canvas-elevated/80"
                       }`}
                     >
                       <div className="flex justify-between items-start gap-2">
                         <div>
                           <div className="flex items-center gap-1.5">
-                            <span className="font-semibold text-text-primary font-mono">{sub.code}</span>
-                            <span className="text-[10px] bg-app-surface border border-app-border text-text-muted px-1 rounded font-mono">
+                            <span className="font-bold text-white font-mono">{sub.code}</span>
+                            <span className="text-[10px] bg-canvas-base border border-canvas-border text-ink-muted px-1.5 py-0.5 rounded font-mono">
                               Sem {sub.semester}
                             </span>
                           </div>
-                          <p className="text-text-secondary text-xs mt-0.5">{sub.name}</p>
+                          <p className="text-ink-secondary text-xs mt-1">{sub.name}</p>
                         </div>
                         <div className="flex items-center gap-1 shrink-0" onClick={(e) => e.stopPropagation()}>
                           <button
                             title="Edit Subject"
                             onClick={() => openEditSubject(sub)}
-                            className="p-1 text-text-muted hover:text-text-primary rounded transition"
+                            className="p-1 text-ink-muted hover:text-white rounded transition"
                           >
-                            <Pencil className="w-3 h-3" />
+                            <Pencil className="w-3.5 h-3.5" />
                           </button>
                           <button
                             title="Delete Subject"
                             onClick={() => setDeleteConfirm({ type: "subject", item: sub })}
-                            className="p-1 text-text-muted hover:text-rose-400 rounded transition"
+                            className="p-1 text-ink-muted hover:text-rose-400 rounded transition"
                           >
-                            <Trash2 className="w-3 h-3" />
+                            <Trash2 className="w-3.5 h-3.5" />
                           </button>
                         </div>
                       </div>
 
-                      <div className="flex items-center gap-3 text-[10px] text-text-muted mt-2 pt-1.5 border-t border-app-border/60 font-mono">
+                      <div className="flex items-center gap-3 text-[10px] text-ink-muted mt-2.5 pt-2 border-t border-canvas-border/50 font-mono">
                         <span>Units: {sub.unitCount || 0}</span>
                         <span>Topics: {sub.topicCount || 0}</span>
                       </div>
@@ -720,15 +720,15 @@ export default function AdminPage() {
           </div>
 
           {/* Column B: Units */}
-          <div className="lg:col-span-4 border border-app-border rounded p-3 bg-app-elevated/20 space-y-2.5">
-            <div className="flex justify-between items-center border-b border-app-border pb-1.5">
+          <div className="lg:col-span-4 border border-canvas-border rounded-xl p-4 bg-canvas-elevated/30 space-y-3">
+            <div className="flex justify-between items-center border-b border-canvas-border pb-2">
               <div>
-                <span className="text-[11px] font-mono font-medium text-text-primary uppercase tracking-wider flex items-center gap-1.5">
-                  <Layers className="w-3.5 h-3.5 text-indigo-lavender" />
+                <span className="text-xs font-mono font-bold text-white uppercase tracking-wider flex items-center gap-1.5">
+                  <Layers className="w-3.5 h-3.5 text-brand-lavender" />
                   <span>Units {selectedSubject ? `(${units.length})` : ""}</span>
                 </span>
                 {selectedSubject && (
-                  <p className="text-[10px] text-indigo-lavender font-mono truncate max-w-[160px] mt-0.5">
+                  <p className="text-[10px] text-brand-lavender font-mono truncate max-w-[160px] mt-0.5">
                     {selectedSubject.code}: {selectedSubject.name}
                   </p>
                 )}
@@ -736,7 +736,7 @@ export default function AdminPage() {
               {selectedSubject && (
                 <button
                   onClick={openAddUnit}
-                  className="rounded bg-indigo-royal px-2 py-0.5 text-[11px] font-medium text-text-primary hover:bg-indigo-muted transition flex items-center gap-1"
+                  className="rounded-lg bg-brand-royal px-2.5 py-1 text-[11px] font-semibold text-white hover:bg-brand-muted transition flex items-center gap-1"
                 >
                   <Plus className="w-3 h-3" />
                   <span>Unit</span>
@@ -745,23 +745,23 @@ export default function AdminPage() {
             </div>
 
             {!selectedSubject ? (
-              <div className="text-center py-12 text-xs text-text-muted">
+              <div className="text-center py-16 text-xs text-ink-muted">
                 &larr; Select a subject from the left column to view units.
               </div>
             ) : unitsLoading ? (
-              <p className="text-xs text-text-muted text-center py-8">Loading units...</p>
+              <p className="text-xs text-ink-muted text-center py-12">Loading units...</p>
             ) : units.length === 0 ? (
-              <div className="text-center py-8 text-xs text-text-muted space-y-2">
+              <div className="text-center py-12 text-xs text-ink-muted space-y-2">
                 <p>No units configured yet.</p>
                 <button
                   onClick={openAddUnit}
-                  className="text-xs text-indigo-lavender hover:underline"
+                  className="text-xs text-brand-lavender hover:underline"
                 >
                   + Add Unit 1
                 </button>
               </div>
             ) : (
-              <div className="space-y-1.5 max-h-[460px] overflow-y-auto pr-1">
+              <div className="space-y-2 max-h-[480px] overflow-y-auto pr-1">
                 {units.map((unit) => {
                   const isSelected = selectedUnit && selectedUnit._id === unit._id;
                   return (
@@ -771,41 +771,41 @@ export default function AdminPage() {
                         setSelectedUnit(unit);
                         loadUnitTopics(unit._id);
                       }}
-                      className={`p-2.5 rounded border text-xs cursor-pointer transition ${
+                      className={`p-3 rounded-xl border text-xs cursor-pointer transition ${
                         isSelected
-                          ? "bg-app-elevated border-indigo-muted text-text-primary"
-                          : "bg-app-surface border-app-border hover:bg-app-elevated/40"
+                          ? "bg-brand-royal/50 border-brand-lavender/50 text-white shadow-glow"
+                          : "bg-canvas-elevated/40 border-canvas-border hover:bg-canvas-elevated/80"
                       }`}
                     >
                       <div className="flex justify-between items-start gap-2">
                         <div>
-                          <span className="font-mono text-text-muted text-[10px]">
+                          <span className="font-mono text-ink-muted text-[10px] bg-canvas-base px-1.5 py-0.5 rounded border border-canvas-border">
                             Unit {unit.unitNo}
                           </span>
-                          <p className="text-text-primary font-medium text-xs mt-0.5 leading-snug">{unit.title}</p>
+                          <p className="text-white font-semibold text-xs mt-1 leading-snug">{unit.title}</p>
                         </div>
                         <div className="flex items-center gap-1 shrink-0" onClick={(e) => e.stopPropagation()}>
                           <button
                             title="Edit Unit"
                             onClick={() => openEditUnit(unit)}
-                            className="p-1 text-text-muted hover:text-text-primary rounded transition"
+                            className="p-1 text-ink-muted hover:text-white rounded transition"
                           >
-                            <Pencil className="w-3 h-3" />
+                            <Pencil className="w-3.5 h-3.5" />
                           </button>
                           <button
                             title="Delete Unit"
                             onClick={() => setDeleteConfirm({ type: "unit", item: unit })}
-                            className="p-1 text-text-muted hover:text-rose-400 rounded transition"
+                            className="p-1 text-ink-muted hover:text-rose-400 rounded transition"
                           >
-                            <Trash2 className="w-3 h-3" />
+                            <Trash2 className="w-3.5 h-3.5" />
                           </button>
                         </div>
                       </div>
 
-                      <div className="flex items-center justify-between text-[10px] text-text-muted mt-2 pt-1.5 border-t border-app-border/60 font-mono">
+                      <div className="flex items-center justify-between text-[10px] text-ink-muted mt-2.5 pt-2 border-t border-canvas-border/50 font-mono">
                         <span>Topics: {unit.topicCount || 0}</span>
-                        <span className="text-indigo-lavender flex items-center gap-0.5">
-                          <span>Inspect</span>
+                        <span className="text-brand-lavender flex items-center gap-0.5">
+                          <span>Topics</span>
                           <ChevronRight className="w-3 h-3" />
                         </span>
                       </div>
@@ -817,15 +817,15 @@ export default function AdminPage() {
           </div>
 
           {/* Column C: Topics & Keywords */}
-          <div className="lg:col-span-4 border border-app-border rounded p-3 bg-app-elevated/20 space-y-2.5">
-            <div className="flex justify-between items-center border-b border-app-border pb-1.5">
+          <div className="lg:col-span-4 border border-canvas-border rounded-xl p-4 bg-canvas-elevated/30 space-y-3">
+            <div className="flex justify-between items-center border-b border-canvas-border pb-2">
               <div>
-                <span className="text-[11px] font-mono font-medium text-text-primary uppercase tracking-wider flex items-center gap-1.5">
-                  <Tags className="w-3.5 h-3.5 text-indigo-lavender" />
+                <span className="text-xs font-mono font-bold text-white uppercase tracking-wider flex items-center gap-1.5">
+                  <Tags className="w-3.5 h-3.5 text-brand-lavender" />
                   <span>Topics {selectedUnit ? `(${unitTopics.length})` : ""}</span>
                 </span>
                 {selectedUnit && (
-                  <p className="text-[10px] text-indigo-lavender font-mono truncate max-w-[160px] mt-0.5">
+                  <p className="text-[10px] text-brand-lavender font-mono truncate max-w-[160px] mt-0.5">
                     Unit {selectedUnit.unitNo}: {selectedUnit.title}
                   </p>
                 )}
@@ -833,7 +833,7 @@ export default function AdminPage() {
               {selectedUnit && (
                 <button
                   onClick={openAddTopic}
-                  className="rounded bg-indigo-royal px-2 py-0.5 text-[11px] font-medium text-text-primary hover:bg-indigo-muted transition flex items-center gap-1"
+                  className="rounded-lg bg-brand-royal px-2.5 py-1 text-[11px] font-semibold text-white hover:bg-brand-muted transition flex items-center gap-1"
                 >
                   <Plus className="w-3 h-3" />
                   <span>Topic</span>
@@ -842,47 +842,47 @@ export default function AdminPage() {
             </div>
 
             {!selectedUnit ? (
-              <div className="text-center py-12 text-xs text-text-muted">
+              <div className="text-center py-16 text-xs text-ink-muted">
                 &larr; Select a unit from the middle column to view topics.
               </div>
             ) : unitTopicsLoading ? (
-              <p className="text-xs text-text-muted text-center py-8">Loading topics...</p>
+              <p className="text-xs text-ink-muted text-center py-12">Loading topics...</p>
             ) : unitTopics.length === 0 ? (
-              <div className="text-center py-8 text-xs text-text-muted space-y-2">
+              <div className="text-center py-12 text-xs text-ink-muted space-y-2">
                 <p>No topics configured in this unit.</p>
                 <button
                   onClick={openAddTopic}
-                  className="text-xs text-indigo-lavender hover:underline"
+                  className="text-xs text-brand-lavender hover:underline"
                 >
                   + Add first topic
                 </button>
               </div>
             ) : (
-              <div className="space-y-1.5 max-h-[460px] overflow-y-auto pr-1">
+              <div className="space-y-2 max-h-[480px] overflow-y-auto pr-1">
                 {unitTopics.map((topic) => (
-                  <div key={topic._id} className="p-2.5 rounded border border-app-border bg-app-surface text-xs space-y-1.5">
+                  <div key={topic._id} className="p-3 rounded-xl border border-canvas-border bg-canvas-elevated/50 text-xs space-y-2">
                     <div className="flex justify-between items-start gap-2">
-                      <p className="font-medium text-text-primary text-xs leading-snug">{topic.name}</p>
+                      <p className="font-semibold text-white text-xs leading-snug">{topic.name}</p>
                       <div className="flex items-center gap-1 shrink-0">
                         <button
                           title="Edit Topic"
                           onClick={() => openEditTopic(topic)}
-                          className="p-1 text-text-muted hover:text-text-primary rounded transition"
+                          className="p-1 text-ink-muted hover:text-white rounded transition"
                         >
-                          <Pencil className="w-3 h-3" />
+                          <Pencil className="w-3.5 h-3.5" />
                         </button>
                         <button
                           title="Delete Topic"
                           onClick={() => setDeleteConfirm({ type: "topic", item: topic })}
-                          className="p-1 text-text-muted hover:text-rose-400 rounded transition"
+                          className="p-1 text-ink-muted hover:text-rose-400 rounded transition"
                         >
-                          <Trash2 className="w-3 h-3" />
+                          <Trash2 className="w-3.5 h-3.5" />
                         </button>
                       </div>
                     </div>
 
-                    <div className="space-y-1 pt-1 border-t border-app-border/50">
-                      <span className="text-[10px] text-text-muted font-mono block">
+                    <div className="space-y-1.5 pt-1.5 border-t border-canvas-border/50">
+                      <span className="text-[10px] text-ink-muted font-mono block">
                         Keywords ({topic.keywords ? topic.keywords.length : 0}):
                       </span>
                       {topic.keywords && topic.keywords.length > 0 ? (
@@ -890,14 +890,14 @@ export default function AdminPage() {
                           {topic.keywords.map((kw, idx) => (
                             <span
                               key={idx}
-                              className="bg-app-elevated border border-app-border text-text-secondary text-[10px] px-1.5 py-0.5 rounded font-mono"
+                              className="bg-canvas-base border border-canvas-border text-ink-secondary text-[10px] px-2 py-0.5 rounded-full font-mono"
                             >
                               {kw}
                             </span>
                           ))}
                         </div>
                       ) : (
-                        <span className="text-[11px] text-text-muted italic">No keywords assigned</span>
+                        <span className="text-[11px] text-ink-muted italic">No keywords assigned</span>
                       )}
                     </div>
                   </div>
@@ -910,44 +910,44 @@ export default function AdminPage() {
 
       {/* MODAL: SUBJECT */}
       {subjectModal && (
-        <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="bg-app-surface rounded border border-app-border max-w-md w-full p-5 space-y-4 shadow-popover">
-            <div className="flex justify-between items-center border-b border-app-border pb-2.5">
-              <h3 className="font-semibold text-xs text-text-primary uppercase tracking-wider font-mono">
+        <div className="fixed inset-0 z-50 bg-black/75 backdrop-blur-md flex items-center justify-center p-4">
+          <div className="glass-panel rounded-2xl max-w-md w-full p-6 space-y-4 shadow-glass">
+            <div className="flex justify-between items-center border-b border-canvas-border pb-3">
+              <h3 className="font-bold text-sm text-white font-mono">
                 {subjectModal.mode === "create" ? "Add New Subject" : `Edit Subject: ${subjectModal.sub.code}`}
               </h3>
-              <button onClick={() => setSubjectModal(null)} className="text-text-muted hover:text-text-primary">
+              <button onClick={() => setSubjectModal(null)} className="text-ink-muted hover:text-white">
                 <X className="w-4 h-4" />
               </button>
             </div>
 
-            <form onSubmit={handleSubjectSubmit} className="space-y-3 text-xs">
-              <div className="space-y-1">
-                <label className="block text-text-secondary font-medium">Subject Code *</label>
+            <form onSubmit={handleSubjectSubmit} className="space-y-3.5 text-xs">
+              <div className="space-y-1.5">
+                <label className="block text-ink-secondary font-medium">Subject Code *</label>
                 <input
                   type="text"
                   required
                   placeholder="e.g. KCS501, KCS051, BCS301"
                   value={subjectForm.code}
                   onChange={(e) => setSubjectForm({ ...subjectForm, code: e.target.value })}
-                  className="w-full rounded border border-app-border bg-app-input px-3 py-2 text-xs text-text-primary font-mono uppercase focus:border-indigo-lavender focus:outline-none transition"
+                  className="w-full rounded-xl glass-input px-3.5 py-2.5 text-xs text-white font-mono uppercase focus:outline-none"
                 />
               </div>
 
-              <div className="space-y-1">
-                <label className="block text-text-secondary font-medium">Subject Name *</label>
+              <div className="space-y-1.5">
+                <label className="block text-ink-secondary font-medium">Subject Name *</label>
                 <input
                   type="text"
                   required
                   placeholder="e.g. Database Management System"
                   value={subjectForm.name}
                   onChange={(e) => setSubjectForm({ ...subjectForm, name: e.target.value })}
-                  className="w-full rounded border border-app-border bg-app-input px-3 py-2 text-xs text-text-primary focus:border-indigo-lavender focus:outline-none transition"
+                  className="w-full rounded-xl glass-input px-3.5 py-2.5 text-xs text-white focus:outline-none"
                 />
               </div>
 
-              <div className="space-y-1">
-                <label className="block text-text-secondary font-medium">Semester *</label>
+              <div className="space-y-1.5">
+                <label className="block text-ink-secondary font-medium">Semester *</label>
                 <input
                   type="number"
                   min={1}
@@ -955,22 +955,22 @@ export default function AdminPage() {
                   required
                   value={subjectForm.semester}
                   onChange={(e) => setSubjectForm({ ...subjectForm, semester: parseInt(e.target.value, 10) || 1 })}
-                  className="w-full rounded border border-app-border bg-app-input px-3 py-2 text-xs text-text-primary font-mono focus:border-indigo-lavender focus:outline-none transition"
+                  className="w-full rounded-xl glass-input px-3.5 py-2.5 text-xs text-white font-mono focus:outline-none"
                 />
               </div>
 
-              <div className="flex justify-end gap-2 pt-3 border-t border-app-border">
+              <div className="flex justify-end gap-2.5 pt-3.5 border-t border-canvas-border">
                 <button
                   type="button"
                   onClick={() => setSubjectModal(null)}
-                  className="px-3 py-1.5 border border-app-border rounded text-text-secondary hover:text-text-primary text-xs"
+                  className="px-4 py-2 border border-canvas-border rounded-xl text-ink-secondary hover:text-white text-xs"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
                   disabled={subjectSubmitting}
-                  className="px-4 py-1.5 bg-indigo-royal text-text-primary rounded hover:bg-indigo-muted text-xs font-medium disabled:opacity-50"
+                  className="px-5 py-2 bg-gradient-to-r from-brand-royal to-brand-muted text-white rounded-xl shadow-cta hover:opacity-95 text-xs font-semibold disabled:opacity-50"
                 >
                   {subjectSubmitting ? "Saving..." : subjectModal.mode === "create" ? "Create Subject" : "Update"}
                 </button>
@@ -982,20 +982,20 @@ export default function AdminPage() {
 
       {/* MODAL: UNIT */}
       {unitModal && (
-        <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="bg-app-surface rounded border border-app-border max-w-md w-full p-5 space-y-4 shadow-popover">
-            <div className="flex justify-between items-center border-b border-app-border pb-2.5">
-              <h3 className="font-semibold text-xs text-text-primary uppercase tracking-wider font-mono">
+        <div className="fixed inset-0 z-50 bg-black/75 backdrop-blur-md flex items-center justify-center p-4">
+          <div className="glass-panel rounded-2xl max-w-md w-full p-6 space-y-4 shadow-glass">
+            <div className="flex justify-between items-center border-b border-canvas-border pb-3">
+              <h3 className="font-bold text-sm text-white font-mono">
                 {unitModal.mode === "create" ? `Add Unit to ${selectedSubject?.code}` : `Edit Unit ${unitModal.unit.unitNo}`}
               </h3>
-              <button onClick={() => setUnitModal(null)} className="text-text-muted hover:text-text-primary">
+              <button onClick={() => setUnitModal(null)} className="text-ink-muted hover:text-white">
                 <X className="w-4 h-4" />
               </button>
             </div>
 
-            <form onSubmit={handleUnitSubmit} className="space-y-3 text-xs">
-              <div className="space-y-1">
-                <label className="block text-text-secondary font-medium">Unit Number *</label>
+            <form onSubmit={handleUnitSubmit} className="space-y-3.5 text-xs">
+              <div className="space-y-1.5">
+                <label className="block text-ink-secondary font-medium">Unit Number *</label>
                 <input
                   type="number"
                   min={1}
@@ -1003,34 +1003,34 @@ export default function AdminPage() {
                   required
                   value={unitForm.unitNo}
                   onChange={(e) => setUnitForm({ ...unitForm, unitNo: parseInt(e.target.value, 10) || 1 })}
-                  className="w-full rounded border border-app-border bg-app-input px-3 py-2 text-xs text-text-primary font-mono focus:border-indigo-lavender focus:outline-none transition"
+                  className="w-full rounded-xl glass-input px-3.5 py-2.5 text-xs text-white font-mono focus:outline-none"
                 />
               </div>
 
-              <div className="space-y-1">
-                <label className="block text-text-secondary font-medium">Unit Title *</label>
+              <div className="space-y-1.5">
+                <label className="block text-ink-secondary font-medium">Unit Title *</label>
                 <input
                   type="text"
                   required
                   placeholder="e.g. Relational Data Model and SQL"
                   value={unitForm.title}
                   onChange={(e) => setUnitForm({ ...unitForm, title: e.target.value })}
-                  className="w-full rounded border border-app-border bg-app-input px-3 py-2 text-xs text-text-primary focus:border-indigo-lavender focus:outline-none transition"
+                  className="w-full rounded-xl glass-input px-3.5 py-2.5 text-xs text-white focus:outline-none"
                 />
               </div>
 
-              <div className="flex justify-end gap-2 pt-3 border-t border-app-border">
+              <div className="flex justify-end gap-2.5 pt-3.5 border-t border-canvas-border">
                 <button
                   type="button"
                   onClick={() => setUnitModal(null)}
-                  className="px-3 py-1.5 border border-app-border rounded text-text-secondary hover:text-text-primary text-xs"
+                  className="px-4 py-2 border border-canvas-border rounded-xl text-ink-secondary hover:text-white text-xs"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
                   disabled={unitSubmitting}
-                  className="px-4 py-1.5 bg-indigo-royal text-text-primary rounded hover:bg-indigo-muted text-xs font-medium disabled:opacity-50"
+                  className="px-5 py-2 bg-gradient-to-r from-brand-royal to-brand-muted text-white rounded-xl shadow-cta hover:opacity-95 text-xs font-semibold disabled:opacity-50"
                 >
                   {unitSubmitting ? "Saving..." : unitModal.mode === "create" ? "Add Unit" : "Update"}
                 </button>
@@ -1042,32 +1042,32 @@ export default function AdminPage() {
 
       {/* MODAL: TOPIC */}
       {topicModal && (
-        <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="bg-app-surface rounded border border-app-border max-w-lg w-full p-5 space-y-4 shadow-popover">
-            <div className="flex justify-between items-center border-b border-app-border pb-2.5">
-              <h3 className="font-semibold text-xs text-text-primary uppercase tracking-wider font-mono">
+        <div className="fixed inset-0 z-50 bg-black/75 backdrop-blur-md flex items-center justify-center p-4">
+          <div className="glass-panel rounded-2xl max-w-lg w-full p-6 space-y-4 shadow-glass">
+            <div className="flex justify-between items-center border-b border-canvas-border pb-3">
+              <h3 className="font-bold text-sm text-white font-mono">
                 {topicModal.mode === "create" ? `Add Topic to Unit ${selectedUnit?.unitNo}` : `Edit Topic: ${topicModal.topic.name}`}
               </h3>
-              <button onClick={() => setTopicModal(null)} className="text-text-muted hover:text-text-primary">
+              <button onClick={() => setTopicModal(null)} className="text-ink-muted hover:text-white">
                 <X className="w-4 h-4" />
               </button>
             </div>
 
-            <form onSubmit={handleTopicSubmit} className="space-y-3 text-xs">
-              <div className="space-y-1">
-                <label className="block text-text-secondary font-medium">Topic Name *</label>
+            <form onSubmit={handleTopicSubmit} className="space-y-3.5 text-xs">
+              <div className="space-y-1.5">
+                <label className="block text-ink-secondary font-medium">Topic Name *</label>
                 <input
                   type="text"
                   required
                   placeholder="e.g. Normalization and Normal Forms (1NF, 2NF, 3NF, BCNF)"
                   value={topicForm.name}
                   onChange={(e) => setTopicForm({ ...topicForm, name: e.target.value })}
-                  className="w-full rounded border border-app-border bg-app-input px-3 py-2 text-xs text-text-primary focus:border-indigo-lavender focus:outline-none transition"
+                  className="w-full rounded-xl glass-input px-3.5 py-2.5 text-xs text-white focus:outline-none"
                 />
               </div>
 
-              <div className="space-y-1">
-                <label className="block text-text-secondary font-medium">
+              <div className="space-y-1.5">
+                <label className="block text-ink-secondary font-medium">
                   NLP Keyword Profile (comma-separated)
                 </label>
                 <textarea
@@ -1075,25 +1075,25 @@ export default function AdminPage() {
                   placeholder="e.g. normalization, normal form, 1nf, 2nf, 3nf, bcnf, functional dependency, lossy, lossless"
                   value={topicForm.keywords}
                   onChange={(e) => setTopicForm({ ...topicForm, keywords: e.target.value })}
-                  className="w-full rounded border border-app-border bg-app-input p-2.5 text-xs text-text-primary font-mono focus:border-indigo-lavender focus:outline-none transition leading-relaxed"
+                  className="w-full rounded-xl glass-input p-3 text-xs text-white font-mono focus:outline-none leading-relaxed"
                 />
-                <span className="text-[10px] text-text-muted block">
+                <span className="text-[10px] text-ink-muted block">
                   Keywords are converted to TF-IDF vectors for cosine similarity scoring against examination questions.
                 </span>
               </div>
 
-              <div className="flex justify-end gap-2 pt-3 border-t border-app-border">
+              <div className="flex justify-end gap-2.5 pt-3.5 border-t border-canvas-border">
                 <button
                   type="button"
                   onClick={() => setTopicModal(null)}
-                  className="px-3 py-1.5 border border-app-border rounded text-text-secondary hover:text-text-primary text-xs"
+                  className="px-4 py-2 border border-canvas-border rounded-xl text-ink-secondary hover:text-white text-xs"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
                   disabled={topicSubmitting}
-                  className="px-4 py-1.5 bg-indigo-royal text-text-primary rounded hover:bg-indigo-muted text-xs font-medium disabled:opacity-50"
+                  className="px-5 py-2 bg-gradient-to-r from-brand-royal to-brand-muted text-white rounded-xl shadow-cta hover:opacity-95 text-xs font-semibold disabled:opacity-50"
                 >
                   {topicSubmitting ? "Saving..." : topicModal.mode === "create" ? "Add Topic" : "Update"}
                 </button>
@@ -1105,19 +1105,19 @@ export default function AdminPage() {
 
       {/* MODAL: DELETE CONFIRMATION */}
       {deleteConfirm && (
-        <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="bg-app-surface rounded border border-app-border max-w-md w-full p-5 space-y-4 shadow-popover">
-            <div className="flex items-center gap-2 text-rose-400 border-b border-app-border pb-2.5">
+        <div className="fixed inset-0 z-50 bg-black/75 backdrop-blur-md flex items-center justify-center p-4">
+          <div className="glass-panel rounded-2xl max-w-md w-full p-6 space-y-4 shadow-glass">
+            <div className="flex items-center gap-2 text-rose-400 border-b border-canvas-border pb-3">
               <AlertTriangle className="w-4 h-4" />
-              <h3 className="font-semibold text-xs text-text-primary uppercase tracking-wider font-mono">
+              <h3 className="font-bold text-sm text-white font-mono">
                 Confirm Deletion: {deleteConfirm.type.toUpperCase()}
               </h3>
             </div>
 
-            <div className="text-xs text-text-secondary space-y-2">
+            <div className="text-xs text-ink-secondary space-y-2">
               <p>
                 Are you sure you want to delete{" "}
-                <strong className="text-text-primary">
+                <strong className="text-white">
                   {deleteConfirm.type === "subject"
                     ? `${deleteConfirm.item.name} (${deleteConfirm.item.code})`
                     : deleteConfirm.type === "unit"
@@ -1126,16 +1126,16 @@ export default function AdminPage() {
                 </strong>
                 ?
               </p>
-              <div className="bg-app-elevated/40 border border-app-border text-text-muted rounded p-2.5 text-[11px] leading-relaxed">
-                <strong className="text-text-secondary">Referential Guard:</strong> Deletion will be prevented if this curriculum node is referenced by existing exam questions, units, or topics.
+              <div className="bg-canvas-elevated border border-canvas-border text-ink-muted rounded-xl p-3 text-[11px] leading-relaxed">
+                <strong className="text-white">Referential Guard:</strong> Deletion will be prevented if this curriculum node is referenced by existing exam questions, units, or topics.
               </div>
             </div>
 
-            <div className="flex justify-end gap-2 pt-3 border-t border-app-border">
+            <div className="flex justify-end gap-2.5 pt-3.5 border-t border-canvas-border">
               <button
                 type="button"
                 onClick={() => setDeleteConfirm(null)}
-                className="px-3 py-1.5 border border-app-border rounded text-text-secondary hover:text-text-primary text-xs"
+                className="px-4 py-2 border border-canvas-border rounded-xl text-ink-secondary hover:text-white text-xs"
               >
                 Cancel
               </button>
@@ -1143,7 +1143,7 @@ export default function AdminPage() {
                 type="button"
                 disabled={deleteSubmitting}
                 onClick={confirmDelete}
-                className="px-4 py-1.5 bg-rose-600 text-white rounded hover:bg-rose-500 text-xs font-medium disabled:opacity-50"
+                className="px-5 py-2 bg-rose-600 text-white rounded-xl hover:bg-rose-500 text-xs font-semibold disabled:opacity-50 transition shadow-cta"
               >
                 {deleteSubmitting ? "Deleting..." : "Confirm Delete"}
               </button>
