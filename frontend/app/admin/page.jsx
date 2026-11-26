@@ -91,7 +91,8 @@ export default function AdminPage() {
       data.append("session", form.session);
       data.append("totalMarks", form.totalMarks);
 
-      const res = await fetch("http://localhost:5000/api/papers", {
+      const API_BASE = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000/api";
+      const res = await fetch(`${API_BASE}/papers`, {
         method: "POST",
         headers: {
           Authorization: `Bearer ${token}`,
