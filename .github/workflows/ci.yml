@@ -10,41 +10,42 @@ permissions:
   contents: read
 
 jobs:
-  build:
+  validate-canonical:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v4
-        with:
-          version: 11.12.0
-          run_install: false
-
-      - name: Setup Node.js
+      - name: Setup Node.js 20
         uses: actions/setup-node@v4
         with:
-          node-version: 24
-          cache: pnpm
-          cache-dependency-path: pnpm-lock.yaml
+          node-version: 20
 
-      - name: Verify runtime versions
+      - name: Setup Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      # 1. Validate Backend (Express.js)
+      - name: Install Backend Dependencies & Run Tests
+        working-directory: ./backend
         run: |
-          node --version
-          pnpm --version
+          npm ci
+          npm test
 
-      - name: Install dependencies
-        run: pnpm install --frozen-lockfile
-
-      - name: Build Shared Packages
+      # 2. Validate NLP Microservice (FastAPI + pytest)
+      - name: Install NLP Dependencies & Run Pytest
+        working-directory: ./nlp
         run: |
-          pnpm --filter @pyq/shared-types build
-          pnpm --filter @pyq/shared-validation build
+          pip install --upgrade pip
+          pip install -r requirements.txt
+          python -c "import nltk; nltk.download('stopwords'); nltk.download('wordnet'); nltk.download('omw-1.4')"
+          pytest -v
 
-      - name: Run Backend Tests
-        run: pnpm --filter @pyq/api test
-
-      - name: Build Next.js Web App
-        run: pnpm --filter @pyq/web build
+      # 3. Validate Frontend (Next.js)
+      - name: Install Frontend Dependencies & Run Build
+        working-directory: ./frontend
+        run: |
+          npm ci
+          npm run build

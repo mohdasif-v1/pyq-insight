@@ -1,0 +1,327 @@
+[
+  {
+    "unit": 1,
+    "topic": "DBMS vs File System",
+    "keywords": [
+      "dbms",
+      "file system",
+      "data redundancy",
+      "data inconsistency",
+      "data isolation",
+      "concurrent access anomalies",
+      "security problems",
+      "integrity constraints"
+    ]
+  },
+  {
+    "unit": 1,
+    "topic": "Data Models, Schemas, and Independence",
+    "keywords": [
+      "three-schema architecture",
+      "data independence",
+      "logical data independence",
+      "physical data independence",
+      "internal schema",
+      "conceptual schema",
+      "external schema",
+      "data models"
+    ]
+  },
+  {
+    "unit": 1,
+    "topic": "DBMS Architecture and DBA",
+    "keywords": [
+      "dbms architecture",
+      "storage manager",
+      "query processor",
+      "database administrator",
+      "dba functions",
+      "buffer manager",
+      "data dictionary"
+    ]
+  },
+  {
+    "unit": 1,
+    "topic": "ER Model Concepts",
+    "keywords": [
+      "entity set",
+      "weak entity set",
+      "relationship set",
+      "attributes",
+      "keys",
+      "generalization",
+      "specialization",
+      "aggregation"
+    ]
+  },
+  {
+    "unit": 1,
+    "topic": "Reducing ER Diagrams to Relational Tables",
+    "keywords": [
+      "er diagram reduction",
+      "mapping entities",
+      "foreign key representation",
+      "composite attributes",
+      "multivalued attributes",
+      "relationship reduction"
+    ]
+  },
+  {
+    "unit": 2,
+    "topic": "Relational Algebra and Calculus",
+    "keywords": [
+      "relational algebra",
+      "select operation",
+      "project operation",
+      "cartesian product",
+      "set union",
+      "set difference",
+      "tuple relational calculus",
+      "domain relational calculus"
+    ]
+  },
+  {
+    "unit": 2,
+    "topic": "SQL DDL, DML, and Aggregate Functions",
+    "keywords": [
+      "sql ddl",
+      "sql dml",
+      "create table",
+      "drop command",
+      "delete command",
+      "alter table",
+      "aggregate functions",
+      "group by having"
+    ]
+  },
+  {
+    "unit": 2,
+    "topic": "Joins and Integrity Constraints",
+    "keywords": [
+      "inner join",
+      "natural join",
+      "outer join",
+      "left outer join",
+      "right outer join",
+      "referential integrity",
+      "entity integrity",
+      "foreign key constraint"
+    ]
+  },
+  {
+    "unit": 2,
+    "topic": "Views, Triggers, and PL/SQL",
+    "keywords": [
+      "views",
+      "triggers",
+      "active database",
+      "pl/sql",
+      "row-level trigger",
+      "statement-level trigger",
+      "stored procedures",
+      "assertions"
+    ]
+  },
+  {
+    "unit": 2,
+    "topic": "Procedural vs Non-Procedural DML",
+    "keywords": [
+      "procedural dml",
+      "non-procedural dml",
+      "declarative dml",
+      "relational algebra procedural",
+      "sql non-procedural",
+      "data manipulation language"
+    ]
+  },
+  {
+    "unit": 3,
+    "topic": "Functional Dependencies and Attribute Closure",
+    "keywords": [
+      "functional dependency",
+      "armstrong's axioms",
+      "attribute closure",
+      "canonical cover",
+      "minimal cover",
+      "trivial dependency",
+      "inference rules"
+    ]
+  },
+  {
+    "unit": 3,
+    "topic": "Keys and Prime Attributes",
+    "keywords": [
+      "candidate key",
+      "super key",
+      "prime attribute",
+      "non-prime attribute",
+      "primary key",
+      "foreign key",
+      "minimal superkey"
+    ]
+  },
+  {
+    "unit": 3,
+    "topic": "Normal Forms (1NF, 2NF, 3NF, BCNF)",
+    "keywords": [
+      "normalization",
+      "first normal form",
+      "second normal form",
+      "third normal form",
+      "boyce-codd normal form",
+      "partial dependency",
+      "transitive dependency"
+    ]
+  },
+  {
+    "unit": 3,
+    "topic": "Multivalued Dependencies, 4NF, and 5NF",
+    "keywords": [
+      "multivalued dependency",
+      "mvd",
+      "fourth normal form",
+      "4nf",
+      "fifth normal form",
+      "5nf",
+      "join dependency",
+      "project-join normal form"
+    ]
+  },
+  {
+    "unit": 3,
+    "topic": "Lossless-Join and Dependency-Preserving Decomposition",
+    "keywords": [
+      "lossless join decomposition",
+      "dependency preserving decomposition",
+      "lossless decomposition",
+      "schema decomposition",
+      "chase test"
+    ]
+  },
+  {
+    "unit": 4,
+    "topic": "ACID Properties and Transaction States",
+    "keywords": [
+      "acid properties",
+      "atomicity",
+      "consistency",
+      "isolation",
+      "durability",
+      "transaction states",
+      "state diagram",
+      "active partially committed"
+    ]
+  },
+  {
+    "unit": 4,
+    "topic": "Schedules and Serializability",
+    "keywords": [
+      "schedule",
+      "serializability",
+      "conflict serializability",
+      "view serializability",
+      "precedence graph",
+      "testing serializability",
+      "swap non-conflicting"
+    ]
+  },
+  {
+    "unit": 4,
+    "topic": "Recoverability of Schedules",
+    "keywords": [
+      "recoverable schedule",
+      "cascadeless schedule",
+      "strict schedule",
+      "cascading rollback",
+      "unrecoverable schedule"
+    ]
+  },
+  {
+    "unit": 4,
+    "topic": "Failure, Log-Based Recovery, and Checkpoints",
+    "keywords": [
+      "log-based recovery",
+      "deferred database modification",
+      "immediate database modification",
+      "checkpoints",
+      "redo phase",
+      "undo phase",
+      "system recovery"
+    ]
+  },
+  {
+    "unit": 4,
+    "topic": "Distributed Database Basics and Replication",
+    "keywords": [
+      "distributed database",
+      "data replication",
+      "synchronous replication",
+      "asynchronous replication",
+      "data fragmentation",
+      "distributed architecture"
+    ]
+  },
+  {
+    "unit": 5,
+    "topic": "Lock-Based Protocols and 2PL",
+    "keywords": [
+      "lock-based protocols",
+      "shared lock",
+      "exclusive lock",
+      "two-phase locking",
+      "2pl",
+      "strict 2pl",
+      "rigorous 2pl",
+      "conservative 2pl"
+    ]
+  },
+  {
+    "unit": 5,
+    "topic": "Timestamp Ordering and Validation Protocols",
+    "keywords": [
+      "timestamp ordering protocol",
+      "thomas write rule",
+      "validation-based protocol",
+      "optimistic concurrency control",
+      "read timestamp",
+      "write timestamp"
+    ]
+  },
+  {
+    "unit": 5,
+    "topic": "Multiversion Concurrency Control",
+    "keywords": [
+      "multiversion scheme",
+      "multiversion concurrency control",
+      "mvcc",
+      "multiversion timestamp ordering",
+      "multiversion two-phase locking"
+    ]
+  },
+  {
+    "unit": 5,
+    "topic": "Deadlock Detection, Prevention, and Recovery",
+    "keywords": [
+      "deadlock detection",
+      "deadlock recovery",
+      "wait-for graph",
+      "deadlock prevention",
+      "wait-die scheme",
+      "wound-wait scheme",
+      "starvation"
+    ]
+  },
+  {
+    "unit": 5,
+    "topic": "Multiple Granularity and Two-Phase Commit",
+    "keywords": [
+      "multiple granularity",
+      "intention lock",
+      "intention shared",
+      "intention exclusive",
+      "two-phase commit",
+      "2pc protocol",
+      "coordinator participant"
+    ]
+  }
+]

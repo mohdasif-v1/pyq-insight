@@ -2,34 +2,40 @@
 node_modules/
 .pnpm-store/
 
-# Production & Build outputs
+# Environment and Secrets (CRITICAL)
+.env
+.env.*
+!.env.example
+backend/.env
+backend/.env.*
+!backend/.env.example
+
+# Build Outputs & Caches
 dist/
 build/
 .next/
 out/
+coverage/
+backend/coverage/
 *.tsbuildinfo
-
-# Python virtual environment & cache
-venv/
-.venv/
+.pytest_cache/
 __pycache__/
 *.pyc
 *.pyo
-*.pyd
-.pytest_cache/
 
-# Environment files & Secrets
-.env
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
-*.pem
-*.key
+# Virtual Environments
+venv/
+.venv/
+apps/ml/venv/
+nlp/venv/
 
-# Uploads & Temporary files
+# Uploads & Runtime Data
 uploads/
-*.pdf
+backend/uploads/
 *.log
+
+# OS & Stream Metadata (Do not stage)
 .DS_Store
 Thumbs.db
+*:Zone.Identifier
+*Zone.Identifier*

@@ -1,0 +1,283 @@
+[
+  {
+    "unit": 1,
+    "topic": "Data Analytics Lifecycle and Big Data Characteristics",
+    "keywords": [
+      "data analytics lifecycle",
+      "lifecycle phases",
+      "big data characteristics",
+      "volume velocity variety",
+      "veracity value",
+      "model building phase",
+      "data preparation"
+    ]
+  },
+  {
+    "unit": 1,
+    "topic": "Data Types and Sources",
+    "keywords": [
+      "structured data",
+      "semi-structured data",
+      "unstructured data",
+      "data sources",
+      "xml json csv",
+      "tabular data"
+    ]
+  },
+  {
+    "unit": 1,
+    "topic": "Categories of Analytics",
+    "keywords": [
+      "descriptive analytics",
+      "predictive analytics",
+      "prescriptive analytics",
+      "diagnostic analytics",
+      "analysis vs reporting"
+    ]
+  },
+  {
+    "unit": 1,
+    "topic": "Modern Data Architecture and Analytics Tools",
+    "keywords": [
+      "modern analytics architecture",
+      "traditional analytics",
+      "data warehouse",
+      "data lake",
+      "open source tools",
+      "scalability"
+    ]
+  },
+  {
+    "unit": 2,
+    "topic": "Regression and Prediction Error",
+    "keywords": [
+      "regression analysis",
+      "linear regression",
+      "lasso regression",
+      "prediction error",
+      "least squares",
+      "bias-variance trade-off",
+      "residuals"
+    ]
+  },
+  {
+    "unit": 2,
+    "topic": "Bayesian Modelling and Networks",
+    "keywords": [
+      "bayesian modeling",
+      "bayesian network",
+      "prior probability",
+      "posterior probability",
+      "conditional probability",
+      "directed acyclic graph",
+      "uncertainty"
+    ]
+  },
+  {
+    "unit": 2,
+    "topic": "Support Vector Machines and Kernel Methods",
+    "keywords": [
+      "support vector machine",
+      "svm",
+      "margin",
+      "support vectors",
+      "kernel methods",
+      "radial basis function",
+      "hyperplane",
+      "kernel trick"
+    ]
+  },
+  {
+    "unit": 2,
+    "topic": "PCA and Dimensionality Reduction",
+    "keywords": [
+      "principal component analysis",
+      "pca",
+      "dimensionality reduction",
+      "eigenvalues",
+      "eigenvectors",
+      "percentage variance",
+      "covariance matrix"
+    ]
+  },
+  {
+    "unit": 2,
+    "topic": "Neural Networks and Generalization",
+    "keywords": [
+      "neural network",
+      "artificial neural network",
+      "generalization",
+      "learning rate",
+      "overfitting",
+      "backpropagation",
+      "activation function"
+    ]
+  },
+  {
+    "unit": 2,
+    "topic": "Fuzzy Logic, Decision Trees, and Outliers",
+    "keywords": [
+      "fuzzy logic",
+      "crisp logic",
+      "membership function",
+      "decision tree",
+      "rule induction",
+      "outlier detection",
+      "multivariate analysis"
+    ]
+  },
+  {
+    "unit": 3,
+    "topic": "Stream Model and Real-Time Analytics",
+    "keywords": [
+      "data stream",
+      "stream processing model",
+      "stream management system",
+      "dsms",
+      "real-time analytics platform",
+      "continuous query"
+    ]
+  },
+  {
+    "unit": 3,
+    "topic": "Sampling and Filtering Streams",
+    "keywords": [
+      "bernoulli sampling",
+      "reservoir sampling",
+      "bloom filter",
+      "stream filtering",
+      "hash functions",
+      "false positive rate"
+    ]
+  },
+  {
+    "unit": 3,
+    "topic": "Counting Distinct Elements and Counting Ones",
+    "keywords": [
+      "counting distinct elements",
+      "flajolet-martin algorithm",
+      "dgim algorithm",
+      "counting ones in a window",
+      "bucket representation",
+      "datar-gionis-indyk-motwani"
+    ]
+  },
+  {
+    "unit": 3,
+    "topic": "Windows in Streams",
+    "keywords": [
+      "sliding window",
+      "tumbling window",
+      "decaying window",
+      "window size",
+      "window slide",
+      "exponentially decaying"
+    ]
+  },
+  {
+    "unit": 4,
+    "topic": "Frequent Itemsets and Market Basket Analysis",
+    "keywords": [
+      "market basket analysis",
+      "frequent itemset",
+      "support",
+      "confidence",
+      "association rules",
+      "candidate generation"
+    ]
+  },
+  {
+    "unit": 4,
+    "topic": "Apriori, PCY, and SON Algorithms",
+    "keywords": [
+      "apriori algorithm",
+      "pcy algorithm",
+      "son algorithm",
+      "hash bucket",
+      "candidate pruning",
+      "frequent itemset mining",
+      "two-pass algorithm"
+    ]
+  },
+  {
+    "unit": 4,
+    "topic": "K-Means and Hierarchical Clustering",
+    "keywords": [
+      "k-means clustering",
+      "hierarchical clustering",
+      "agglomerative clustering",
+      "centroid",
+      "cluster assignment",
+      "dendrogram",
+      "silhouette score"
+    ]
+  },
+  {
+    "unit": 4,
+    "topic": "Subspace and Non-Euclidean Clustering",
+    "keywords": [
+      "clique algorithm",
+      "proclus algorithm",
+      "subspace clustering",
+      "high-dimensional data",
+      "non-euclidean spaces",
+      "jaccard distance",
+      "cosine distance"
+    ]
+  },
+  {
+    "unit": 5,
+    "topic": "Hadoop, HDFS, and MapReduce",
+    "keywords": [
+      "apache hadoop",
+      "hdfs",
+      "mapreduce",
+      "namenode",
+      "datanode",
+      "key-value pairs",
+      "map phase",
+      "reduce phase"
+    ]
+  },
+  {
+    "unit": 5,
+    "topic": "Hive, Pig, and NoSQL Frameworks",
+    "keywords": [
+      "apache hive",
+      "hive architecture",
+      "apache pig",
+      "pig latin",
+      "nosql",
+      "sharding",
+      "nosql vs rdbms",
+      "hiveql"
+    ]
+  },
+  {
+    "unit": 5,
+    "topic": "Exploratory Data Analysis and Descriptive Statistics",
+    "keywords": [
+      "exploratory data analysis",
+      "eda",
+      "descriptive statistics",
+      "mean",
+      "standard deviation",
+      "data spread",
+      "variance",
+      "median"
+    ]
+  },
+  {
+    "unit": 5,
+    "topic": "Visualization and Analytics Tools (R, KNIME, OpenRefine)",
+    "keywords": [
+      "data visualization",
+      "interactive data exploration",
+      "r programming",
+      "knime",
+      "openrefine",
+      "human in the loop",
+      "data cleaning"
+    ]
+  }
+]
