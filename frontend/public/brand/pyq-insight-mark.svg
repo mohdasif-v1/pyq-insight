@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none">
+  <rect width="32" height="32" rx="8" fill="#10141C" />
+  <rect x="0.5" y="0.5" width="31" height="31" rx="7.5" stroke="#283142" stroke-width="1" />
+  <!-- Minimal geometric document / exam paper with analytic chevron -->
+  <path d="M8 8C8 6.89543 8.89543 6 10 6H18L24 12V24C24 25.1046 23.1046 26 22 26H10C8.89543 26 8 25.1046 8 24V8Z" fill="#151A23" stroke="#8B9CF6" stroke-width="1.75" stroke-linejoin="round"/>
+  <!-- Fold corner -->
+  <path d="M18 6V12H24" stroke="#8B9CF6" stroke-width="1.75" stroke-linejoin="round"/>
+  <!-- Analytical upward insight spark / bars -->
+  <line x1="12" y1="16" x2="16" y2="16" stroke="#83B5C9" stroke-width="1.5" stroke-linecap="round"/>
+  <line x1="12" y1="20" x2="20" y2="20" stroke="#8B9CF6" stroke-width="1.5" stroke-linecap="round"/>
+  <!-- Dynamic upward trend node -->
+  <circle cx="19" cy="15" r="1.5" fill="#78B99A" />
+</svg>

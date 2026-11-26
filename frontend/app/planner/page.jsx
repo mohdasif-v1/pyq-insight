@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { api } from "@/lib/api";
+import { CalendarDays, Clock, Sparkles, BookOpen, CheckCircle, ArrowRight } from "lucide-react";
 
 export default function PlannerPage() {
   const router = useRouter();
@@ -64,26 +65,27 @@ export default function PlannerPage() {
   }
 
   return (
-    <main className="mx-auto max-w-4xl space-y-8 p-6">
-      <div className="border-b pb-4">
-        <h1 className="text-3xl font-extrabold text-slate-900">Adaptive Study Planner</h1>
-        <p className="text-sm text-slate-500 mt-1">
-          Greedy schedule distribution: high priority and weak topics receive more hours, ending with a dedicated revision day.
+    <main className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
+      <div className="border-b border-dark-border pb-6">
+        <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-slate-100">Adaptive Study Planner</h1>
+        <p className="text-xs sm:text-sm text-slate-400 mt-1">
+          Greedy timetable distribution: high-yield priority topics receive proportional study hours, concluding with an integrated revision buffer.
         </p>
       </div>
 
       {error && (
-        <div className="rounded-lg bg-red-50 p-4 text-sm text-red-700 border border-red-200">
+        <div className="rounded-lg bg-status-error/10 border border-status-error/25 p-4 text-xs sm:text-sm text-status-error font-medium">
           {error}
         </div>
       )}
 
-      <form onSubmit={generate} className="rounded-xl border bg-white p-6 shadow-sm space-y-4">
+      {/* Plan Generation Form */}
+      <form onSubmit={generate} className="rounded-xl border border-dark-border bg-dark-card p-6 shadow-card space-y-5">
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-          <div>
-            <label className="block text-xs font-semibold text-slate-700 mb-1">Subject</label>
+          <div className="space-y-1.5">
+            <label className="block text-xs font-medium text-slate-300">Subject</label>
             <select
-              className="w-full rounded-lg border border-slate-300 p-2.5 text-sm font-medium focus:border-indigo-500 focus:outline-none"
+              className="w-full rounded-lg border border-dark-border bg-dark-surface px-3 py-2 text-xs sm:text-sm text-slate-200 font-medium focus:border-brand-primary focus:outline-none"
               value={form.subjectId}
               required
               onChange={(e) => handleSubjectChange(e.target.value)}
@@ -96,71 +98,90 @@ export default function PlannerPage() {
             </select>
           </div>
 
-          <div>
-            <label className="block text-xs font-semibold text-slate-700 mb-1">Target Exam Date</label>
+          <div className="space-y-1.5">
+            <label className="block text-xs font-medium text-slate-300">Target Exam Date</label>
             <input
-              className="w-full rounded-lg border border-slate-300 p-2.5 text-sm focus:border-indigo-500 focus:outline-none"
               type="date"
               required
+              className="w-full rounded-lg border border-dark-border bg-dark-surface px-3 py-2 text-xs sm:text-sm text-slate-200 font-mono focus:border-brand-primary focus:outline-none"
               value={form.examDate}
               onChange={(e) => setForm({ ...form, examDate: e.target.value })}
             />
           </div>
 
-          <div>
-            <label className="block text-xs font-semibold text-slate-700 mb-1">Daily Study Hours</label>
+          <div className="space-y-1.5">
+            <label className="block text-xs font-medium text-slate-300">Daily Study Hours</label>
             <input
-              className="w-full rounded-lg border border-slate-300 p-2.5 text-sm focus:border-indigo-500 focus:outline-none"
               type="number"
-              min="1"
-              max="14"
-              value={form.dailyHours}
+              min={1}
+              max={12}
               required
-              onChange={(e) => setForm({ ...form, dailyHours: e.target.value })}
+              className="w-full rounded-lg border border-dark-border bg-dark-surface px-3 py-2 text-xs sm:text-sm text-slate-200 focus:border-brand-primary focus:outline-none"
+              value={form.dailyHours}
+              onChange={(e) => setForm({ ...form, dailyHours: parseInt(e.target.value, 10) || 1 })}
             />
           </div>
         </div>
 
         <button
           disabled={loading}
-          className="rounded-lg bg-indigo-600 px-6 py-2.5 text-sm font-medium text-white hover:bg-indigo-700 shadow-sm transition disabled:opacity-50"
+          className="rounded-lg bg-brand-primary px-5 py-2.5 text-xs sm:text-sm font-semibold text-dark-bg hover:bg-brand-hover transition shadow-subtle flex items-center gap-2 disabled:opacity-50"
         >
-          {loading ? "Generating Schedule..." : "Generate Optimal Study Plan"}
+          <Sparkles className="w-4 h-4" />
+          <span>{loading ? "Computing optimal schedule..." : "Generate Study Plan"}</span>
         </button>
       </form>
 
+      {/* Generated Plan View */}
       {plan && (
-        <div className="rounded-xl border bg-white p-6 shadow-sm space-y-4">
-          <div className="flex justify-between items-center border-b pb-4">
-            <h2 className="text-xl font-bold text-slate-900">Your Study Schedule</h2>
-            <span className="text-xs font-medium px-3 py-1 rounded-full bg-indigo-50 text-indigo-700 border border-indigo-200">
-              Exam Date: {new Date(plan.examDate).toLocaleDateString()}
+        <div className="rounded-xl border border-dark-border bg-dark-card p-6 shadow-card space-y-6">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-dark-border pb-4">
+            <div>
+              <h2 className="text-lg font-bold text-slate-100">Personalized Schedule</h2>
+              <p className="text-xs text-slate-400 mt-0.5">
+                Target Date: <span className="font-mono text-slate-200">{new Date(plan.examDate).toLocaleDateString()}</span> • {plan.dailyHours} Hours/Day
+              </p>
+            </div>
+            <span className="text-xs font-semibold px-2.5 py-1 rounded bg-status-success-muted border border-status-success/30 text-status-success">
+              {plan.schedule.length} Days Allocated
             </span>
           </div>
 
-          <div className="overflow-x-auto">
-            <table className="w-full text-left text-sm divide-y">
-              <thead className="bg-slate-50 text-xs font-semibold text-slate-600 uppercase">
-                <tr>
-                  <th className="py-3 px-4">Day</th>
-                  <th className="py-3 px-4">Topic / Session</th>
-                  <th className="py-3 px-4">Allocated Hours</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y text-slate-700">
-                {plan.schedule.map((s, i) => {
-                  const isRev = s.topic_id === "REVISION";
-                  const topicName = isRev ? "🎯 Final Comprehensive Revision" : (topicsMap[s.topic_id] || s.topic_id);
-                  return (
-                    <tr key={i} className={isRev ? "bg-amber-50 font-semibold" : "hover:bg-slate-50"}>
-                      <td className="py-3 px-4 font-medium text-slate-900">Day {s.day}</td>
-                      <td className="py-3 px-4">{topicName}</td>
-                      <td className="py-3 px-4 font-semibold text-indigo-600">{s.hours} hrs</td>
-                    </tr>
-                  );
-                })}
-              </tbody>
-            </table>
+          <div className="space-y-3">
+            {plan.schedule.map((day) => (
+              <div
+                key={day.day}
+                className="rounded-lg border border-dark-border bg-dark-surface p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3 hover:border-slate-500/50 transition"
+              >
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-lg bg-dark-card border border-dark-border flex flex-col items-center justify-center shrink-0">
+                    <span className="text-[9px] uppercase font-bold text-slate-500">Day</span>
+                    <span className="text-sm font-bold text-brand-primary leading-none">{day.day}</span>
+                  </div>
+
+                  <div>
+                    <h3 className="text-xs sm:text-sm font-semibold text-slate-100">
+                      {day.topicName || topicsMap[day.topicId] || (day.isRevision ? "Comprehensive Revision" : "Review")}
+                    </h3>
+                    <p className="text-[11px] text-slate-400 font-mono mt-0.5">
+                      {new Date(day.date).toLocaleDateString("en-US", { weekday: "short", month: "short", day: "numeric" })}
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex items-center gap-2 text-xs">
+                  {day.isRevision ? (
+                    <span className="px-2.5 py-1 rounded bg-brand-primary/10 border border-brand-primary/30 text-brand-primary font-semibold text-[11px]">
+                      Full Syllabus Revision
+                    </span>
+                  ) : (
+                    <span className="px-2.5 py-1 rounded bg-dark-card border border-dark-border text-slate-300 font-mono font-medium text-[11px]">
+                      {day.hours} Hours
+                    </span>
+                  )}
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       )}
