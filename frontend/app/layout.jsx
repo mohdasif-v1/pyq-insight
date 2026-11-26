@@ -8,40 +8,25 @@ export const metadata = {
     template: "%s | PYQ Insight",
   },
   description:
-    "Deconstruct university past year papers with Natural Language Processing. Uncover high-probability exam topics, credit distributions, and automated study schedules.",
+    "Analyze past examination question papers with NLP. Topic importance distributions, credit weightage, and structured study planning.",
   applicationName: "PYQ Insight",
   authors: [{ name: "Mohd Asif", url: "https://github.com/mohdasif-v1/pyq-insight" }],
-  keywords: [
-    "AKTU PYQ",
-    "AKTU Exam Prep",
-    "Previous Year Questions",
-    "NLP Exam Analysis",
-    "Engineering Question Papers",
-  ],
   icons: {
     icon: "/brand/pyq-insight-mark.svg",
     apple: "/brand/pyq-insight-mark.svg",
-  },
-  openGraph: {
-    title: "PYQ Insight — Engineering Examination Intelligence",
-    description: "Quantified exam prep using NLP on AKTU past papers.",
-    url: "https://pyq-insight.vercel.app",
-    siteName: "PYQ Insight",
-    locale: "en_US",
-    type: "website",
   },
 };
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en" className="dark">
-      <body className="min-h-screen flex flex-col bg-slate-950 text-slate-100 selection:bg-blue-600/30 selection:text-blue-300">
+      <body className="min-h-screen flex flex-col bg-app-bg text-text-primary selection:bg-indigo-muted/40 selection:text-text-primary">
         <Navbar />
         <div className="flex-1 flex flex-col">{children}</div>
-        <footer className="border-t border-slate-800/80 bg-slate-950 py-6 text-xs text-slate-500">
+        <footer className="border-t border-app-border bg-app-bg py-5 text-xs text-text-muted">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-2">
-            <span className="font-mono text-[11px] text-slate-400">PYQ INSIGHT // AKTU B.TECH CURRICULUM</span>
-            <span className="text-slate-600 font-mono text-[11px]">NLP EXTRACTION &bull; GREEDY SCHEDULING &bull; CLUSTER VECTORIZATION</span>
+            <span className="font-mono text-[11px] text-text-secondary">PYQ INSIGHT &bull; AKTU B.TECH CURRICULUM</span>
+            <span className="text-[11px] text-text-muted">NLP Question Ingestion &bull; TF-IDF Classification &bull; Study Optimization</span>
           </div>
         </footer>
       </body>

@@ -7,11 +7,11 @@ import {
   LayoutDashboard,
   Calendar,
   Layers,
-  ShieldAlert,
+  ShieldCheck,
   LogOut,
+  User,
   Menu,
   X,
-  User,
 } from "lucide-react";
 
 export default function Navbar() {
@@ -46,17 +46,17 @@ export default function Navbar() {
   ];
 
   if (user?.role === "admin") {
-    navLinks.push({ href: "/admin", label: "Admin Console", icon: ShieldAlert });
+    navLinks.push({ href: "/admin", label: "Admin Console", icon: ShieldCheck });
   }
 
   return (
-    <header className="sticky top-0 z-50 border-b border-slate-800/90 bg-slate-950/80 backdrop-blur-md">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 h-14 flex items-center justify-between">
-        {/* Logo */}
+    <header className="sticky top-0 z-50 border-b border-app-border bg-app-surface/90 backdrop-blur-md">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 h-13 flex items-center justify-between">
+        {/* Brand */}
         <Logo size="default" />
 
-        {/* Desktop Links */}
-        <nav className="hidden md:flex items-center gap-1">
+        {/* Desktop Navigation */}
+        <nav className="hidden md:flex items-center gap-1.5">
           {user ? (
             <>
               {navLinks.map((item) => {
@@ -66,35 +66,35 @@ export default function Navbar() {
                   <Link
                     key={item.href}
                     href={item.href}
-                    className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-md text-xs font-medium transition ${
+                    className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded text-xs font-medium transition ${
                       active
-                        ? "bg-slate-850 text-white border border-slate-750"
-                        : "text-slate-400 hover:text-slate-200 hover:bg-slate-900"
+                        ? "bg-indigo-royal text-text-primary"
+                        : "text-text-secondary hover:text-text-primary hover:bg-app-elevated"
                     }`}
                   >
-                    <Icon className="w-3.5 h-3.5 text-slate-400" />
+                    <Icon className={`w-3.5 h-3.5 ${active ? "text-indigo-lavender" : "text-text-muted"}`} />
                     <span>{item.label}</span>
                   </Link>
                 );
               })}
 
-              <div className="flex items-center gap-3 pl-4 ml-2 border-l border-slate-800">
+              <div className="flex items-center gap-3 pl-3 ml-2 border-l border-app-border">
                 <div className="flex items-center gap-2">
-                  <div className="w-6 h-6 rounded bg-slate-850 border border-slate-750 flex items-center justify-center text-slate-300">
-                    <User className="w-3.5 h-3.5 text-slate-400" />
+                  <div className="w-6 h-6 rounded bg-indigo-royal flex items-center justify-center text-text-primary">
+                    <User className="w-3.5 h-3.5 text-indigo-lavender" />
                   </div>
                   <div className="flex flex-col text-left">
-                    <span className="text-xs font-medium text-slate-200 leading-none">{user.name}</span>
-                    <span className="text-[10px] text-slate-500 uppercase font-mono leading-none mt-1">{user.role}</span>
+                    <span className="text-xs font-medium text-text-primary leading-none">{user.name}</span>
+                    <span className="text-[10px] text-text-muted uppercase font-mono leading-none mt-1">{user.role}</span>
                   </div>
                 </div>
 
                 <button
                   onClick={handleLogout}
                   title="Sign out"
-                  className="p-1.5 text-slate-500 hover:text-rose-400 hover:bg-slate-900 rounded transition"
+                  className="p-1.5 text-text-muted hover:text-rose-400 hover:bg-app-elevated rounded transition"
                 >
-                  <LogOut className="w-4 h-4" />
+                  <LogOut className="w-3.5 h-3.5" />
                 </button>
               </div>
             </>
@@ -103,13 +103,13 @@ export default function Navbar() {
               <div className="flex items-center gap-2">
                 <Link
                   href="/login"
-                  className="px-3 py-1.5 text-xs font-medium text-slate-300 hover:text-white hover:bg-slate-900 rounded-md transition"
+                  className="px-3 py-1.5 text-xs font-medium text-text-secondary hover:text-text-primary hover:bg-app-elevated rounded transition"
                 >
                   Sign in
                 </Link>
                 <Link
                   href="/register"
-                  className="px-3.5 py-1.5 text-xs font-medium bg-blue-600 text-white rounded-md hover:bg-blue-500 transition shadow-sm font-semibold"
+                  className="px-3.5 py-1.5 text-xs font-medium bg-indigo-royal text-text-primary rounded hover:bg-indigo-muted transition"
                 >
                   Get Started
                 </Link>
@@ -119,11 +119,10 @@ export default function Navbar() {
         </nav>
 
         {/* Mobile menu trigger */}
-        <div className="flex items-center md:hidden">
+        <div className="flex md:hidden items-center">
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="p-1.5 text-slate-400 hover:text-white rounded-md hover:bg-slate-900"
-            aria-label="Toggle Navigation"
+            className="p-1.5 text-text-secondary hover:text-text-primary rounded"
           >
             {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
           </button>
@@ -132,64 +131,60 @@ export default function Navbar() {
 
       {/* Mobile Drawer */}
       {mobileMenuOpen && (
-        <div className="md:hidden border-b border-slate-800 bg-slate-950 px-4 py-4 space-y-2">
+        <div className="md:hidden border-b border-app-border bg-app-surface px-4 py-3 space-y-1">
           {user ? (
             <>
-              <div className="flex items-center gap-2.5 pb-3 border-b border-slate-800 px-1">
-                <div className="w-7 h-7 rounded bg-slate-850 border border-slate-750 flex items-center justify-center">
-                  <User className="w-4 h-4 text-slate-400" />
+              <div className="flex items-center gap-2 py-2 border-b border-app-border mb-2">
+                <div className="w-7 h-7 rounded bg-indigo-royal flex items-center justify-center text-text-primary">
+                  <User className="w-4 h-4 text-indigo-lavender" />
                 </div>
                 <div>
-                  <p className="text-xs font-medium text-slate-200">{user.name}</p>
-                  <p className="text-[10px] text-slate-500 uppercase font-mono">{user.role}</p>
+                  <p className="text-xs font-medium text-text-primary">{user.name}</p>
+                  <p className="text-[10px] text-text-muted font-mono">{user.role}</p>
                 </div>
               </div>
 
-              <div className="space-y-1 pt-1">
-                {navLinks.map((item) => {
-                  const Icon = item.icon;
-                  const active = pathname === item.href;
-                  return (
-                    <Link
-                      key={item.href}
-                      href={item.href}
-                      onClick={() => setMobileMenuOpen(false)}
-                      className={`flex items-center gap-2.5 px-3 py-2 rounded-md text-xs font-medium transition ${
-                        active
-                          ? "bg-slate-850 text-white border border-slate-750"
-                          : "text-slate-400 hover:text-white hover:bg-slate-900"
-                      }`}
-                    >
-                      <Icon className="w-4 h-4" />
-                      <span>{item.label}</span>
-                    </Link>
-                  );
-                })}
-              </div>
+              {navLinks.map((item) => {
+                const Icon = item.icon;
+                const active = pathname === item.href;
+                return (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    onClick={() => setMobileMenuOpen(false)}
+                    className={`flex items-center gap-2.5 px-3 py-2 rounded text-xs font-medium ${
+                      active
+                        ? "bg-indigo-royal text-text-primary"
+                        : "text-text-secondary hover:text-text-primary hover:bg-app-elevated"
+                    }`}
+                  >
+                    <Icon className="w-4 h-4" />
+                    <span>{item.label}</span>
+                  </Link>
+                );
+              })}
 
-              <div className="pt-2 border-t border-slate-800">
-                <button
-                  onClick={handleLogout}
-                  className="flex items-center gap-2 px-3 py-2 text-xs font-medium text-rose-400 hover:bg-rose-950/20 rounded-md w-full text-left"
-                >
-                  <LogOut className="w-4 h-4" />
-                  <span>Sign out</span>
-                </button>
-              </div>
+              <button
+                onClick={handleLogout}
+                className="w-full flex items-center gap-2.5 px-3 py-2 rounded text-xs font-medium text-rose-400 hover:bg-app-elevated transition mt-2 pt-2 border-t border-app-border"
+              >
+                <LogOut className="w-4 h-4" />
+                <span>Sign Out</span>
+              </button>
             </>
           ) : (
-            <div className="flex flex-col gap-2 pt-2">
+            <div className="space-y-2 py-2">
               <Link
                 href="/login"
                 onClick={() => setMobileMenuOpen(false)}
-                className="w-full text-center px-4 py-2 text-xs font-medium text-slate-300 border border-slate-800 rounded-md bg-slate-900"
+                className="block text-center py-2 text-xs font-medium text-text-secondary hover:text-text-primary"
               >
                 Sign in
               </Link>
               <Link
                 href="/register"
                 onClick={() => setMobileMenuOpen(false)}
-                className="w-full text-center px-4 py-2 text-xs font-semibold bg-blue-600 text-white rounded-md"
+                className="block text-center py-2 text-xs font-medium bg-indigo-royal text-text-primary rounded"
               >
                 Get Started
               </Link>

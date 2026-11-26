@@ -7,31 +7,41 @@
 }
 
 body {
-  background-color: #090A0F;
-  color: #EEF2F6;
+  background-color: #0F0E26;
+  color: #F5F3F8;
   font-feature-settings: "cv02", "cv03", "cv04", "cv11";
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Precision scrollbar */
+/* Subtle, elegant scrollbar */
 ::-webkit-scrollbar {
-  width: 5px;
-  height: 5px;
+  width: 6px;
+  height: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #090A0F;
+  background: #0F0E26;
 }
 ::-webkit-scrollbar-thumb {
-  background: #222B3D;
-  border-radius: 9999px;
+  background: #292456;
+  border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #2D374D;
+  background: #433D8B;
 }
 
-/* Crisp focus outline */
+/* Restrained focus outline */
 :focus-visible {
-  outline: 2px solid #2563EB;
-  outline-offset: 2px;
+  outline: 1.5px solid #C8ACD6;
+  outline-offset: 1px;
+}
+
+/* Enterprise table & data utilities */
+.table-dense th {
+  padding-top: 0.625rem;
+  padding-bottom: 0.625rem;
+}
+.table-dense td {
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
 }

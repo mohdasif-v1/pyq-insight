@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { api } from "@/lib/api";
-import { Check, AlertTriangle, Layers, Calendar, Award } from "lucide-react";
+import { Check, Layers, ArrowRight } from "lucide-react";
 
 export default function PracticePage() {
   const router = useRouter();
@@ -51,20 +51,20 @@ export default function PracticePage() {
 
   return (
     <main className="max-w-6xl mx-auto px-4 sm:px-6 py-8 space-y-6">
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-800 pb-5">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-app-border pb-4">
         <div>
-          <h1 className="text-xl sm:text-2xl font-bold tracking-tight text-white">PYQ Practice Clusters</h1>
-          <p className="text-xs text-slate-400 mt-0.5">
+          <h1 className="text-xl font-bold tracking-tight text-text-primary">PYQ Practice Clusters</h1>
+          <p className="text-xs text-text-muted mt-0.5">
             Paraphrased question variations grouped via TF-IDF K-Means clustering across university exam sessions
           </p>
         </div>
 
-        <div className="flex items-center gap-2.5">
-          <label className="text-xs font-mono text-slate-400 uppercase tracking-wider">Subject:</label>
+        <div className="flex items-center gap-2">
+          <label className="text-xs font-mono text-text-muted uppercase">Subject:</label>
           <select
             value={selectedSubject}
             onChange={(e) => setSelectedSubject(e.target.value)}
-            className="rounded-md border border-slate-750 bg-slate-900 px-3 py-1.5 text-xs text-slate-200 font-medium focus:border-blue-500 focus:outline-none font-mono"
+            className="rounded border border-app-border bg-app-surface px-3 py-1.5 text-xs text-text-primary focus:border-indigo-lavender focus:outline-none font-mono"
           >
             {subjects.map((s) => (
               <option key={s._id} value={s._id}>
@@ -76,89 +76,64 @@ export default function PracticePage() {
       </div>
 
       {error && (
-        <div className="rounded-md bg-rose-950/40 border border-rose-800/50 p-3 text-xs text-rose-300 font-medium">
+        <div className="rounded border border-rose-500/30 bg-rose-500/10 p-3 text-xs text-rose-300 font-medium">
           {error}
         </div>
       )}
 
       {loading ? (
-        <p className="py-16 text-center text-xs text-slate-500 font-mono">Loading K-Means question clusters...</p>
-      ) : clusters.length > 0 ? (
+        <div className="text-center py-16 text-xs text-text-muted">Loading question clusters...</div>
+      ) : clusters.length === 0 ? (
+        <div className="text-center py-12 text-xs text-text-muted">
+          No question clusters formed for this subject yet. Ingest question papers through the Admin Console to compute embeddings.
+        </div>
+      ) : (
         <div className="space-y-4">
-          {clusters.map((c) => {
-            const status = clusterStatus[c.clusterId] || "pending";
-            const sampleTopicId = c.questions[0]?.topicId;
-
+          {clusters.map((c, idx) => {
+            const isResolved = clusterStatus[c.clusterId || idx] === "mastered";
             return (
               <div
-                key={c.clusterId}
-                className="rounded-xl border border-slate-800 bg-slate-900/90 p-5 shadow-panel space-y-3.5 hover:border-slate-700 transition"
+                key={c.clusterId || idx}
+                className="rounded border border-app-border bg-app-surface p-4 space-y-3"
               >
-                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-800 pb-3">
-                  <div className="flex items-center gap-3">
-                    <span className="px-2 py-0.5 rounded bg-blue-950/60 border border-blue-800/50 text-blue-400 text-[11px] font-mono font-bold">
-                      CLUSTER #{c.clusterId}
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-app-border pb-2.5">
+                  <div className="flex items-center gap-2">
+                    <span className="text-[11px] font-mono px-2 py-0.5 rounded bg-indigo-royal text-indigo-lavender">
+                      Cluster {idx + 1}
                     </span>
-                    <div>
-                      <h3 className="font-semibold text-slate-100 text-xs sm:text-sm">{c.topicName}</h3>
-                      <span className="text-[10px] text-slate-500 font-mono">
-                        {c.count} recurring questions detected
-                      </span>
-                    </div>
+                    <span className="text-xs font-semibold text-text-primary">{c.topicName || "Core Topic"}</span>
+                    <span className="text-[10px] text-text-muted font-mono">({c.questions?.length || 0} variations)</span>
                   </div>
 
-                  <div className="flex items-center gap-1.5">
-                    <button
-                      onClick={() => markCluster(c.clusterId, "done", sampleTopicId)}
-                      className={`px-2.5 py-1 text-[11px] rounded font-medium transition ${
-                        status === "done"
-                          ? "bg-emerald-600 text-white font-semibold"
-                          : "border border-slate-800 text-slate-400 hover:text-white hover:bg-slate-800"
-                      }`}
-                    >
-                      Mastered
-                    </button>
-                    <button
-                      onClick={() => markCluster(c.clusterId, "weak", sampleTopicId)}
-                      className={`px-2.5 py-1 text-[11px] rounded font-medium transition ${
-                        status === "weak"
-                          ? "bg-rose-600 text-white font-semibold"
-                          : "border border-slate-800 text-slate-400 hover:text-white hover:bg-slate-800"
-                      }`}
-                    >
-                      Needs Practice
-                    </button>
-                  </div>
+                  <button
+                    onClick={() => markCluster(c.clusterId || idx, isResolved ? "pending" : "mastered", c.topicId)}
+                    className={`px-2.5 py-1 rounded text-[11px] font-medium transition self-start sm:self-auto ${
+                      isResolved
+                        ? "bg-emerald-500/15 text-emerald-400 border border-emerald-500/30"
+                        : "bg-app-elevated text-text-secondary hover:text-text-primary border border-app-border"
+                    }`}
+                  >
+                    {isResolved ? "Cluster Practiced" : "Mark as Practiced"}
+                  </button>
                 </div>
 
                 <div className="space-y-2">
-                  {c.questions.map((q, idx) => (
+                  {c.questions?.map((q, qIdx) => (
                     <div
-                      key={q.id || idx}
-                      className="p-3 rounded-md bg-slate-950/60 border border-slate-800/80 flex flex-col sm:flex-row sm:items-start justify-between gap-2.5 text-xs leading-relaxed"
+                      key={q._id || qIdx}
+                      className="p-3 rounded border border-app-border bg-app-elevated/40 space-y-1.5"
                     >
-                      <p className="text-slate-200 font-normal">{q.text}</p>
-                      <div className="flex items-center gap-1.5 shrink-0">
-                        <span className="px-1.5 py-0.5 rounded bg-slate-900 border border-slate-800 text-slate-400 font-mono text-[10px]">
-                          {q.year} {q.session}
-                        </span>
-                        <span className="px-1.5 py-0.5 rounded bg-blue-950/60 border border-blue-800/50 text-blue-400 font-mono text-[10px]">
-                          {q.marks} Marks
-                        </span>
+                      <div className="flex items-center justify-between text-[11px] font-mono text-text-muted">
+                        <span>{q.paperYear ? `${q.paperYear} ${q.paperSession || "Odd"} Semester` : `Question ${qIdx + 1}`}</span>
+                        <span className="text-indigo-lavender font-semibold">{q.marks || 10} Marks</span>
                       </div>
+                      <p className="text-xs text-text-secondary leading-relaxed font-normal">{q.text}</p>
                     </div>
                   ))}
                 </div>
               </div>
             );
           })}
-        </div>
-      ) : (
-        <div className="text-center py-16 rounded-xl border border-slate-800 bg-slate-900/50 p-8 space-y-1.5 font-mono">
-          <p className="text-slate-300 font-medium text-xs">No question clusters computed for this subject.</p>
-          <p className="text-[11px] text-slate-500">
-            Upload exam papers in the Admin console to run K-Means vector clustering.
-          </p>
         </div>
       )}
     </main>

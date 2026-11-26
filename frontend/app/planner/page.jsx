@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { api } from "@/lib/api";
-import { Calendar, Clock, Sparkles, BookOpen, ArrowRight } from "lucide-react";
+import { Calendar, Clock, BookOpen, ArrowRight } from "lucide-react";
 
 export default function PlannerPage() {
   const router = useRouter();
@@ -65,29 +65,34 @@ export default function PlannerPage() {
 
   return (
     <main className="max-w-5xl mx-auto px-4 sm:px-6 py-8 space-y-6">
-      <div className="border-b border-slate-800 pb-5">
-        <h1 className="text-xl sm:text-2xl font-bold tracking-tight text-white">Adaptive Study Scheduler</h1>
-        <p className="text-xs text-slate-400 mt-0.5">
-          Dynamic knapsack algorithm allocating hours by topic credit weightage with mandatory final-day revision
+      <div className="border-b border-app-border pb-4">
+        <h1 className="text-xl font-bold tracking-tight text-text-primary">Adaptive Study Timetable</h1>
+        <p className="text-xs text-text-muted mt-0.5">
+          Dynamic knapsack optimizer allocating preparation hours by topic weightage with mandatory final revision buffer
         </p>
       </div>
 
       {error && (
-        <div className="rounded-md bg-rose-950/40 border border-rose-800/50 p-3 text-xs text-rose-300 font-medium">
+        <div className="rounded border border-rose-500/30 bg-rose-500/10 p-3 text-xs text-rose-300 font-medium">
           {error}
         </div>
       )}
 
-      {/* Form */}
-      <form onSubmit={generate} className="rounded-xl border border-slate-800 bg-slate-900/90 p-5 shadow-panel space-y-4">
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-          <div className="space-y-1.5">
-            <label className="block text-xs font-mono text-slate-300 uppercase tracking-wider">Subject</label>
+      {/* Form Parameters */}
+      <div className="rounded border border-app-border bg-app-surface p-5 space-y-4">
+        <div className="border-b border-app-border pb-2.5">
+          <h2 className="text-xs font-semibold text-text-primary uppercase tracking-wider font-mono">
+            Timetable Constraints &amp; Targets
+          </h2>
+        </div>
+
+        <form onSubmit={generate} className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs">
+          <div className="space-y-1">
+            <label className="block text-text-secondary font-medium">Target Subject</label>
             <select
-              className="w-full rounded-md border border-slate-750 bg-slate-950 px-3 py-2 text-xs text-slate-200 font-mono focus:border-blue-500 focus:outline-none"
               value={form.subjectId}
-              required
               onChange={(e) => handleSubjectChange(e.target.value)}
+              className="w-full rounded border border-app-border bg-app-input px-3 py-2 text-xs text-text-primary focus:border-indigo-lavender focus:outline-none transition font-mono"
             >
               {subjects.map((s) => (
                 <option key={s._id} value={s._id}>
@@ -97,90 +102,99 @@ export default function PlannerPage() {
             </select>
           </div>
 
-          <div className="space-y-1.5">
-            <label className="block text-xs font-mono text-slate-300 uppercase tracking-wider">Target Examination Date</label>
+          <div className="space-y-1">
+            <label className="block text-text-secondary font-medium">Exam Date</label>
             <input
               type="date"
               required
-              className="w-full rounded-md border border-slate-750 bg-slate-950 px-3 py-2 text-xs text-slate-200 font-mono focus:border-blue-500 focus:outline-none"
               value={form.examDate}
               onChange={(e) => setForm({ ...form, examDate: e.target.value })}
+              className="w-full rounded border border-app-border bg-app-input px-3 py-2 text-xs text-text-primary focus:border-indigo-lavender focus:outline-none transition font-mono"
             />
           </div>
 
-          <div className="space-y-1.5">
-            <label className="block text-xs font-mono text-slate-300 uppercase tracking-wider">Daily Hours</label>
+          <div className="space-y-1">
+            <label className="block text-text-secondary font-medium">Daily Dedicated Hours</label>
             <input
               type="number"
               min={1}
-              max={12}
+              max={16}
               required
-              className="w-full rounded-md border border-slate-750 bg-slate-950 px-3 py-2 text-xs text-slate-200 font-mono focus:border-blue-500 focus:outline-none"
               value={form.dailyHours}
               onChange={(e) => setForm({ ...form, dailyHours: parseInt(e.target.value, 10) || 1 })}
+              className="w-full rounded border border-app-border bg-app-input px-3 py-2 text-xs text-text-primary focus:border-indigo-lavender focus:outline-none transition font-mono"
             />
           </div>
-        </div>
 
-        <button
-          disabled={loading}
-          className="rounded-md bg-blue-600 px-4 py-2 text-xs font-semibold text-white hover:bg-blue-500 transition shadow-sm flex items-center gap-2 disabled:opacity-50"
-        >
-          <Sparkles className="w-3.5 h-3.5" />
-          <span>{loading ? "Computing optimal timetable..." : "Generate Preparation Schedule"}</span>
-        </button>
-      </form>
+          <div className="sm:col-span-3 pt-2">
+            <button
+              type="submit"
+              disabled={loading}
+              className="px-5 py-2 rounded bg-indigo-royal text-text-primary text-xs font-medium hover:bg-indigo-muted transition disabled:opacity-50"
+            >
+              {loading ? "Computing Knapsack Allocation..." : "Generate Optimized Schedule"}
+            </button>
+          </div>
+        </form>
+      </div>
 
-      {/* Schedule Output */}
+      {/* Generated Schedule Table */}
       {plan && (
-        <div className="rounded-xl border border-slate-800 bg-slate-900/90 p-5 shadow-panel space-y-5">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-800 pb-3">
-            <div>
-              <h2 className="text-sm font-bold text-white uppercase tracking-wider font-mono">Personalized Timetable</h2>
-              <p className="text-[11px] text-slate-400 font-mono mt-0.5">
-                Target: {new Date(plan.examDate).toLocaleDateString()} &bull; {plan.dailyHours} Hours/Day
-              </p>
+        <div className="space-y-5">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <div className="p-3.5 rounded border border-app-border bg-app-surface">
+              <span className="text-[10px] font-mono text-text-muted uppercase">Total Study Days</span>
+              <p className="text-base font-semibold text-text-primary font-mono mt-0.5">{plan.daysAvailable || 14} Days</p>
             </div>
-            <span className="text-[11px] font-mono px-2 py-0.5 rounded bg-emerald-950/60 border border-emerald-800/50 text-emerald-400">
-              {plan.schedule.length} Days Allocated
-            </span>
+            <div className="p-3.5 rounded border border-app-border bg-app-surface">
+              <span className="text-[10px] font-mono text-text-muted uppercase">Allocated Hours</span>
+              <p className="text-base font-semibold text-text-primary font-mono mt-0.5">{plan.totalHours || 56} Hours</p>
+            </div>
+            <div className="p-3.5 rounded border border-app-border bg-app-surface">
+              <span className="text-[10px] font-mono text-text-muted uppercase">Revision Buffer</span>
+              <p className="text-base font-semibold text-indigo-lavender font-mono mt-0.5">Final 48h Locked</p>
+            </div>
           </div>
 
-          <div className="space-y-2">
-            {plan.schedule.map((day) => (
-              <div
-                key={day.day}
-                className="rounded-lg border border-slate-800 bg-slate-950/60 p-3.5 flex flex-col sm:flex-row sm:items-center justify-between gap-3 hover:border-slate-700 transition"
-              >
-                <div className="flex items-center gap-3">
-                  <div className="w-9 h-9 rounded bg-slate-900 border border-slate-800 flex flex-col items-center justify-center shrink-0">
-                    <span className="text-[8px] font-mono uppercase text-slate-500">DAY</span>
-                    <span className="text-xs font-bold text-blue-400 leading-none">{day.day}</span>
-                  </div>
+          <div className="border border-app-border rounded bg-app-surface overflow-hidden">
+            <div className="px-4 py-3 border-b border-app-border bg-app-elevated/40 flex items-center justify-between">
+              <span className="text-xs font-semibold text-text-primary">Day-by-Day Study Routine</span>
+              <span className="text-[11px] font-mono text-text-muted">Dynamic Priority Distribution</span>
+            </div>
 
-                  <div>
-                    <h3 className="text-xs font-semibold text-slate-100">
-                      {day.topicName || topicsMap[day.topicId] || (day.isRevision ? "Comprehensive Syllabus Revision" : "Review")}
-                    </h3>
-                    <p className="text-[10px] text-slate-500 font-mono mt-0.5">
-                      {new Date(day.date).toLocaleDateString("en-US", { weekday: "short", month: "short", day: "numeric" })}
-                    </p>
-                  </div>
-                </div>
-
-                <div className="flex items-center gap-2 text-xs">
-                  {day.isRevision ? (
-                    <span className="px-2 py-0.5 rounded bg-blue-950/60 border border-blue-800/50 text-blue-400 font-mono text-[10px]">
-                      Mandatory Revision Buffer
-                    </span>
-                  ) : (
-                    <span className="px-2 py-0.5 rounded bg-slate-900 border border-slate-800 text-slate-300 font-mono text-[10px]">
-                      {day.hours} Hours
-                    </span>
-                  )}
-                </div>
-              </div>
-            ))}
+            <div className="overflow-x-auto">
+              <table className="w-full text-left text-xs">
+                <thead className="border-b border-app-border text-[11px] font-mono text-text-muted bg-app-surface">
+                  <tr>
+                    <th className="px-4 py-2.5 font-normal">Day &bull; Date</th>
+                    <th className="px-4 py-2.5 font-normal">Allocated Topic</th>
+                    <th className="px-4 py-2.5 font-normal">Target Hours</th>
+                    <th className="px-4 py-2.5 font-normal text-right">Phase Type</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-app-border text-text-secondary">
+                  {plan.schedule?.map((item, idx) => {
+                    const isRevision = item.topic?.toLowerCase().includes("revision") || item.topic?.includes("Buffer");
+                    return (
+                      <tr key={idx} className="hover:bg-app-elevated/40 transition">
+                        <td className="px-4 py-2.5 font-mono text-text-primary">Day {item.day} &bull; {item.date}</td>
+                        <td className="px-4 py-2.5 font-medium text-text-primary">
+                          {topicsMap[item.topic] || item.topic}
+                        </td>
+                        <td className="px-4 py-2.5 font-mono">{item.hours}h</td>
+                        <td className="px-4 py-2.5 text-right font-mono text-[11px]">
+                          {isRevision ? (
+                            <span className="text-indigo-lavender font-medium">REVISION BUFFER</span>
+                          ) : (
+                            <span className="text-text-muted">CORE TOPIC</span>
+                          )}
+                        </td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
       )}
