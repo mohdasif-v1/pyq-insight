@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { api } from "@/lib/api";
-import { CheckCircle2, AlertTriangle, Layers, Calendar, Award } from "lucide-react";
+import { Check, AlertTriangle, Layers, Calendar, Award } from "lucide-react";
 
 export default function PracticePage() {
   const router = useRouter();
@@ -50,21 +50,21 @@ export default function PracticePage() {
   }
 
   return (
-    <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-dark-border pb-6">
+    <main className="max-w-6xl mx-auto px-4 sm:px-6 py-8 space-y-6">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-800 pb-5">
         <div>
-          <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-slate-100">Practice Mode</h1>
-          <p className="text-xs sm:text-sm text-slate-400 mt-1">
-            Repeated &amp; paraphrased question clusters grouped by K-Means similarity across university examination papers.
+          <h1 className="text-xl sm:text-2xl font-bold tracking-tight text-white">PYQ Practice Clusters</h1>
+          <p className="text-xs text-slate-400 mt-0.5">
+            Paraphrased question variations grouped via TF-IDF K-Means clustering across university exam sessions
           </p>
         </div>
 
-        <div className="flex items-center gap-3">
-          <label className="text-xs font-medium text-slate-400 whitespace-nowrap">Subject:</label>
+        <div className="flex items-center gap-2.5">
+          <label className="text-xs font-mono text-slate-400 uppercase tracking-wider">Subject:</label>
           <select
             value={selectedSubject}
             onChange={(e) => setSelectedSubject(e.target.value)}
-            className="rounded-lg border border-dark-border bg-dark-card px-3 py-2 text-xs sm:text-sm text-slate-200 font-medium shadow-subtle focus:border-brand-primary focus:outline-none"
+            className="rounded-md border border-slate-750 bg-slate-900 px-3 py-1.5 text-xs text-slate-200 font-medium focus:border-blue-500 focus:outline-none font-mono"
           >
             {subjects.map((s) => (
               <option key={s._id} value={s._id}>
@@ -76,15 +76,15 @@ export default function PracticePage() {
       </div>
 
       {error && (
-        <div className="rounded-lg bg-status-error/10 border border-status-error/25 p-4 text-xs sm:text-sm text-status-error font-medium">
+        <div className="rounded-md bg-rose-950/40 border border-rose-800/50 p-3 text-xs text-rose-300 font-medium">
           {error}
         </div>
       )}
 
       {loading ? (
-        <p className="py-16 text-center text-xs text-slate-500">Loading repeated question clusters...</p>
+        <p className="py-16 text-center text-xs text-slate-500 font-mono">Loading K-Means question clusters...</p>
       ) : clusters.length > 0 ? (
-        <div className="space-y-6">
+        <div className="space-y-4">
           {clusters.map((c) => {
             const status = clusterStatus[c.clusterId] || "pending";
             const sampleTopicId = c.questions[0]?.topicId;
@@ -92,59 +92,57 @@ export default function PracticePage() {
             return (
               <div
                 key={c.clusterId}
-                className="rounded-xl border border-dark-border bg-dark-card p-6 shadow-card space-y-4 hover:border-slate-500/50 transition"
+                className="rounded-xl border border-slate-800 bg-slate-900/90 p-5 shadow-panel space-y-3.5 hover:border-slate-700 transition"
               >
-                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-dark-border pb-4">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-800 pb-3">
                   <div className="flex items-center gap-3">
-                    <span className="px-2.5 py-1 rounded bg-dark-surface border border-dark-border text-brand-primary text-xs font-bold font-mono">
-                      Cluster #{c.clusterId}
+                    <span className="px-2 py-0.5 rounded bg-blue-950/60 border border-blue-800/50 text-blue-400 text-[11px] font-mono font-bold">
+                      CLUSTER #{c.clusterId}
                     </span>
                     <div>
-                      <h3 className="font-semibold text-slate-100 text-sm">{c.topicName}</h3>
-                      <span className="text-[11px] text-slate-500">
-                        {c.count} recurring occurrences identified
+                      <h3 className="font-semibold text-slate-100 text-xs sm:text-sm">{c.topicName}</h3>
+                      <span className="text-[10px] text-slate-500 font-mono">
+                        {c.count} recurring questions detected
                       </span>
                     </div>
                   </div>
 
-                  <div className="flex items-center gap-2">
+                  <div className="flex items-center gap-1.5">
                     <button
                       onClick={() => markCluster(c.clusterId, "done", sampleTopicId)}
-                      className={`inline-flex items-center gap-1 px-3 py-1.5 text-xs rounded-md font-medium transition ${
+                      className={`px-2.5 py-1 text-[11px] rounded font-medium transition ${
                         status === "done"
-                          ? "bg-status-success text-dark-bg font-semibold"
-                          : "border border-dark-border text-slate-300 hover:bg-dark-surface"
+                          ? "bg-emerald-600 text-white font-semibold"
+                          : "border border-slate-800 text-slate-400 hover:text-white hover:bg-slate-800"
                       }`}
                     >
-                      <CheckCircle2 className="w-3.5 h-3.5" />
-                      <span>Mastered</span>
+                      Mastered
                     </button>
                     <button
                       onClick={() => markCluster(c.clusterId, "weak", sampleTopicId)}
-                      className={`inline-flex items-center gap-1 px-3 py-1.5 text-xs rounded-md font-medium transition ${
+                      className={`px-2.5 py-1 text-[11px] rounded font-medium transition ${
                         status === "weak"
-                          ? "bg-status-error text-dark-bg font-semibold"
-                          : "border border-dark-border text-slate-300 hover:bg-dark-surface"
+                          ? "bg-rose-600 text-white font-semibold"
+                          : "border border-slate-800 text-slate-400 hover:text-white hover:bg-slate-800"
                       }`}
                     >
-                      <AlertTriangle className="w-3.5 h-3.5" />
-                      <span>Needs Practice</span>
+                      Needs Practice
                     </button>
                   </div>
                 </div>
 
-                <div className="space-y-2.5">
+                <div className="space-y-2">
                   {c.questions.map((q, idx) => (
                     <div
                       key={q.id || idx}
-                      className="p-3.5 rounded-lg bg-dark-surface border border-dark-border flex flex-col sm:flex-row sm:items-start justify-between gap-3 text-xs leading-relaxed"
+                      className="p-3 rounded-md bg-slate-950/60 border border-slate-800/80 flex flex-col sm:flex-row sm:items-start justify-between gap-2.5 text-xs leading-relaxed"
                     >
-                      <p className="text-slate-200">{q.text}</p>
-                      <div className="flex items-center gap-2 shrink-0">
-                        <span className="px-2 py-0.5 rounded bg-dark-card border border-dark-border text-slate-400 font-mono text-[10px]">
+                      <p className="text-slate-200 font-normal">{q.text}</p>
+                      <div className="flex items-center gap-1.5 shrink-0">
+                        <span className="px-1.5 py-0.5 rounded bg-slate-900 border border-slate-800 text-slate-400 font-mono text-[10px]">
                           {q.year} {q.session}
                         </span>
-                        <span className="px-2 py-0.5 rounded bg-brand-primary/10 border border-brand-primary/30 text-brand-primary font-semibold text-[10px]">
+                        <span className="px-1.5 py-0.5 rounded bg-blue-950/60 border border-blue-800/50 text-blue-400 font-mono text-[10px]">
                           {q.marks} Marks
                         </span>
                       </div>
@@ -156,10 +154,10 @@ export default function PracticePage() {
           })}
         </div>
       ) : (
-        <div className="text-center py-16 rounded-xl border border-dark-border bg-dark-card p-8 space-y-2">
-          <p className="text-slate-300 font-medium text-sm">No repeated question clusters found for this subject yet.</p>
-          <p className="text-xs text-slate-500">
-            Upload examination papers in the Admin portal to automatically run TF-IDF K-Means clustering.
+        <div className="text-center py-16 rounded-xl border border-slate-800 bg-slate-900/50 p-8 space-y-1.5 font-mono">
+          <p className="text-slate-300 font-medium text-xs">No question clusters computed for this subject.</p>
+          <p className="text-[11px] text-slate-500">
+            Upload exam papers in the Admin console to run K-Means vector clustering.
           </p>
         </div>
       )}
