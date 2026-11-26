@@ -1,11 +1,14 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none">
-  <!-- Outer precision frame -->
-  <rect width="32" height="32" rx="7" fill="#0E1117" stroke="#222B3D" stroke-width="1"/>
-  <!-- Modern Monogram "P" + Analytical Wave Matrix -->
-  <path d="M9 23V9H16.5C18.9853 9 21 11.0147 21 13.5C21 15.9853 18.9853 18 16.5 18H9" stroke="#F8FAFC" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-  <!-- Focus accent dot -->
-  <circle cx="16.5" cy="13.5" r="1.5" fill="#2563EB"/>
-  <!-- Upward trend slash -->
-  <path d="M19 23L23 19" stroke="#2563EB" stroke-width="2" stroke-linecap="round"/>
-  <circle cx="23" cy="19" r="1" fill="#38BDF8"/>
+  <!-- Precision Dark Obsidian Surface Frame -->
+  <rect width="32" height="32" rx="7" fill="#17153B" stroke="#2E236C" stroke-width="1.2"/>
+  
+  <!-- Architectural Knowledge Document Node: Letter P with Synaptic Data Connection -->
+  <path d="M9 23V9H16.2C18.851 9 21 11.0147 21 13.5C21 15.9853 18.851 18 16.2 18H9" stroke="#F8FAFC" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+  
+  <!-- NLP Topic Vector Core Dot -->
+  <circle cx="16.2" cy="13.5" r="1.6" fill="#C8ACD6"/>
+  
+  <!-- Predictive Examination Trend Vector & Convergence Dot -->
+  <path d="M19 23L23.5 18.5" stroke="#38BDF8" stroke-width="2.2" stroke-linecap="round"/>
+  <circle cx="23.5" cy="18.5" r="1.2" fill="#38BDF8"/>
 </svg>

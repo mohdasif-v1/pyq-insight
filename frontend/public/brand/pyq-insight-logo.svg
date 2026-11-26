@@ -1,11 +1,13 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 170 32" fill="none">
-  <g transform="translate(0, 0)">
-    <rect width="32" height="32" rx="7" fill="#0E1117" stroke="#222B3D" stroke-width="1"/>
-    <path d="M9 23V9H16.5C18.9853 9 21 11.0147 21 13.5C21 15.9853 18.9853 18 16.5 18H9" stroke="#F8FAFC" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-    <circle cx="16.5" cy="13.5" r="1.5" fill="#2563EB"/>
-    <path d="M19 23L23 19" stroke="#2563EB" stroke-width="2" stroke-linecap="round"/>
-    <circle cx="23" cy="19" r="1" fill="#38BDF8"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 34" fill="none">
+  <!-- Symbol -->
+  <g transform="translate(1, 1)">
+    <rect width="32" height="32" rx="7" fill="#17153B" stroke="#2E236C" stroke-width="1.2"/>
+    <path d="M9 23V9H16.2C18.851 9 21 11.0147 21 13.5C21 15.9853 18.851 18 16.2 18H9" stroke="#F8FAFC" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="16.2" cy="13.5" r="1.6" fill="#C8ACD6"/>
+    <path d="M19 23L23.5 18.5" stroke="#38BDF8" stroke-width="2.2" stroke-linecap="round"/>
+    <circle cx="23.5" cy="18.5" r="1.2" fill="#38BDF8"/>
   </g>
-  <text x="42" y="21" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-weight="700" font-size="15" letter-spacing="-0.03em" fill="#F8FAFC">PYQ</text>
-  <text x="76" y="21" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-weight="400" font-size="15" letter-spacing="-0.01em" fill="#9AA4B2">INSIGHT</text>
+  <!-- Wordmark -->
+  <text x="44" y="22" font-family="'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-weight="800" font-size="16" letter-spacing="-0.03em" fill="#F8FAFC">PYQ</text>
+  <text x="82" y="22" font-family="'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-weight="500" font-size="15" letter-spacing="0.04em" fill="#C8ACD6">INSIGHT</text>
 </svg>

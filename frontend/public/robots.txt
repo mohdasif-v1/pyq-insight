@@ -1,0 +1,16 @@
+# PYQ Insight - robots.txt
+User-agent: *
+Allow: /
+Allow: /practice
+Allow: /planner
+
+# Disallow private user & administrative dashboards from search indexing
+Disallow: /admin
+Disallow: /admin/*
+Disallow: /dashboard
+Disallow: /dashboard/*
+Disallow: /login
+Disallow: /register
+Disallow: /api/*
+
+Sitemap: https://pyq-insight.vercel.app/sitemap.xml

@@ -1,0 +1,21 @@
+{
+  "name": "PYQ Insight",
+  "short_name": "PYQ Insight",
+  "description": "Smart Previous-Year Question Paper Analysis",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0A0915",
+  "theme_color": "#0A0915",
+  "icons": [
+    {
+      "src": "/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    },
+    {
+      "src": "/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    }
+  ]
+}

@@ -1,0 +1,112 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <defs>
+    <!-- Background Gradient -->
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0A0915"/>
+      <stop offset="50%" stop-color="#0F0D20"/>
+      <stop offset="100%" stop-color="#17153B"/>
+    </linearGradient>
+    
+    <!-- Glow Gradients -->
+    <radialGradient id="glow-royal" cx="70%" cy="35%" r="50%">
+      <stop offset="0%" stop-color="#2E236C" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#0A0915" stop-opacity="0"/>
+    </radialGradient>
+
+    <radialGradient id="glow-cyan" cx="85%" cy="65%" r="40%">
+      <stop offset="0%" stop-color="#38BDF8" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#0A0915" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <!-- Deep Canvas -->
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect width="1200" height="630" fill="url(#glow-royal)"/>
+  <rect width="1200" height="630" fill="url(#glow-cyan)"/>
+
+  <!-- Subtle Grid Lines -->
+  <g stroke="rgba(200, 172, 214, 0.08)" stroke-width="1">
+    <line x1="100" y1="0" x2="100" y2="630"/>
+    <line x1="300" y1="0" x2="300" y2="630"/>
+    <line x1="500" y1="0" x2="500" y2="630"/>
+    <line x1="700" y1="0" x2="700" y2="630"/>
+    <line x1="900" y1="0" x2="900" y2="630"/>
+    <line x1="1100" y1="0" x2="1100" y2="630"/>
+    <line x1="0" y1="120" x2="1200" y2="120"/>
+    <line x1="0" y1="280" x2="1200" y2="280"/>
+    <line x1="0" y1="440" x2="1200" y2="440"/>
+  </g>
+
+  <!-- Left Content Column -->
+  <g transform="translate(100, 100)">
+    <!-- Brand Logo Monogram -->
+    <g transform="translate(0, 0)">
+      <rect width="56" height="56" rx="14" fill="#17153B" stroke="#2E236C" stroke-width="2"/>
+      <path d="M16 40V16H28C32.4 16 36 19.6 36 24C36 28.4 32.4 32 28 32H16" stroke="#F8FAFC" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+      <circle cx="28" cy="24" r="2.8" fill="#C8ACD6"/>
+      <path d="M33 40L41 32" stroke="#38BDF8" stroke-width="3.5" stroke-linecap="round"/>
+      <circle cx="41" cy="32" r="2.2" fill="#38BDF8"/>
+    </g>
+
+    <!-- Wordmark & Tagline -->
+    <text x="76" y="38" font-family="'Plus Jakarta Sans', sans-serif" font-weight="800" font-size="28" letter-spacing="-0.03em" fill="#F8FAFC">PYQ</text>
+    <text x="144" y="38" font-family="'Plus Jakarta Sans', sans-serif" font-weight="500" font-size="26" letter-spacing="0.06em" fill="#C8ACD6">INSIGHT</text>
+
+    <!-- Main Headline -->
+    <text x="0" y="160" font-family="'Plus Jakarta Sans', sans-serif" font-weight="800" font-size="52" letter-spacing="-0.02em" fill="#FFFFFF">
+      Turn Previous-Year Papers
+    </text>
+    <text x="0" y="224" font-family="'Plus Jakarta Sans', sans-serif" font-weight="800" font-size="52" letter-spacing="-0.02em" fill="#C8ACD6">
+      Into Exam Intelligence.
+    </text>
+
+    <!-- Subtitle -->
+    <text x="0" y="295" font-family="'Plus Jakarta Sans', sans-serif" font-weight="400" font-size="22" fill="#CBD5E1" opacity="0.9">
+      NLP Question Paper Ingestion &bull; TF-IDF Topic Weighting &bull; Adaptive Knapsack Timetables
+    </text>
+
+    <!-- Badges / Metrics -->
+    <g transform="translate(0, 360)">
+      <rect width="210" height="42" rx="10" fill="rgba(23, 21, 59, 0.8)" stroke="#2E236C" stroke-width="1.2"/>
+      <circle cx="22" cy="21" r="5" fill="#10B981"/>
+      <text x="36" y="26" font-family="'JetBrains Mono', monospace" font-size="13" font-weight="600" fill="#F8FAFC">100% Extraction Accuracy</text>
+    </g>
+
+    <g transform="translate(230, 360)">
+      <rect width="180" height="42" rx="10" fill="rgba(23, 21, 59, 0.8)" stroke="#2E236C" stroke-width="1.2"/>
+      <text x="20" y="26" font-family="'JetBrains Mono', monospace" font-size="13" font-weight="500" fill="#38BDF8">0.24s TF-IDF Latency</text>
+    </g>
+
+    <g transform="translate(430, 360)">
+      <rect width="160" height="42" rx="10" fill="rgba(23, 21, 59, 0.8)" stroke="#2E236C" stroke-width="1.2"/>
+      <text x="20" y="26" font-family="'JetBrains Mono', monospace" font-size="13" font-weight="500" fill="#C8ACD6">AKTU B.Tech CSE</text>
+    </g>
+  </g>
+
+  <!-- Right Geometric 3D Mockup Graphic Node -->
+  <g transform="translate(860, 290)">
+    <!-- Central Polyhedron Rings -->
+    <circle cx="0" cy="0" r="140" fill="none" stroke="rgba(200, 172, 214, 0.2)" stroke-width="2" stroke-dasharray="8 6"/>
+    <ellipse cx="0" cy="0" rx="180" ry="80" fill="none" stroke="rgba(56, 189, 248, 0.3)" stroke-width="2" transform="rotate(-25)"/>
+    <ellipse cx="0" cy="0" rx="160" ry="70" fill="none" stroke="rgba(139, 92, 246, 0.35)" stroke-width="2" transform="rotate(35)"/>
+    
+    <!-- Central Solid Core -->
+    <circle cx="0" cy="0" r="55" fill="#2E236C" stroke="#C8ACD6" stroke-width="2.5"/>
+    <circle cx="0" cy="0" r="24" fill="#38BDF8" opacity="0.8"/>
+
+    <!-- Document Wireframe Planes -->
+    <rect x="-140" y="-120" width="70" height="95" rx="6" fill="rgba(23, 21, 59, 0.85)" stroke="#38BDF8" stroke-width="1.8" transform="rotate(-15)"/>
+    <rect x="80" y="40" width="70" height="95" rx="6" fill="rgba(23, 21, 59, 0.85)" stroke="#C8ACD6" stroke-width="1.8" transform="rotate(18)"/>
+
+    <!-- Orbiting Topic Nodes -->
+    <circle cx="-110" cy="70" r="6" fill="#C8ACD6"/>
+    <circle cx="120" cy="-60" r="7" fill="#38BDF8"/>
+    <circle cx="-40" cy="-130" r="5" fill="#8B5CF6"/>
+    <circle cx="50" cy="120" r="6" fill="#10B981"/>
+
+    <!-- Connecting Synaptic Lines -->
+    <line x1="-110" y1="70" x2="0" y2="0" stroke="rgba(200, 172, 214, 0.4)" stroke-width="1.5"/>
+    <line x1="120" y1="-60" x2="0" y2="0" stroke="rgba(56, 189, 248, 0.4)" stroke-width="1.5"/>
+    <line x1="-40" y1="-130" x2="0" y2="0" stroke="rgba(139, 92, 246, 0.4)" stroke-width="1.5"/>
+  </g>
+</svg>
